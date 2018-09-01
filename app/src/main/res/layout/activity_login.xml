@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:paddingTop="26dp"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="131dp"
+        android:layout_marginEnd="-116dp"
+        android:layout_toStartOf="@+id/mnnit"
+        android:src="@drawable/mnnit" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="298dp"
+        android:layout_height="67dp"
+        android:layout_above="@+id/passwordLayout"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:id="@+id/edittxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registration_number"
+            android:drawableStart="@mipmap/user"
+            android:lines="1"
+            android:inputType="number"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordLayout"
+        android:layout_width="298dp"
+        android:layout_height="67dp"
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:drawableStart="@mipmap/lock"
+            android:drawableEnd="@mipmap/password_visibile_off"
+            android:maxLength="30"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/mnnit"
+        android:layout_width="252dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="116dp"
+        android:gravity="center|bottom"
+        android:text="@string/mnnit"
+        android:textColor="#859fc9"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="252dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="116dp"
+        android:text="@string/allahabad"
+        android:layout_below="@+id/mnnit"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center|top"/>
+
+</RelativeLayout>

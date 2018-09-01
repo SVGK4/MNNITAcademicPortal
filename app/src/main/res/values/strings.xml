@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MNNIT Academic Portal</string>
+    <string name="password">Password</string>
+    <string name="registration_number">Registration Number</string>
+    <string name="mnnit">MNNIT</string>
+    <string name="allahabad">ALLAHABAD</string>
+</resources>
