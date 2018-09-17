@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:paddingTop="26dp"
+    tools:context=".ForgotActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="26dp">
+
+        <ImageView
+            android:layout_width="97dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/mnnit"
+            android:src="@drawable/mnnit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:id="@+id/mnnit"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:gravity="center|bottom"
+                android:text="@string/mnnit"
+                android:textColor="#859fc9"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:gravity="center|top"
+                android:text="@string/allahabad"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,73 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:paddingTop="26dp"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:layout_width="110dp"
-        android:layout_height="131dp"
-        android:layout_marginEnd="-116dp"
-        android:layout_toStartOf="@+id/mnnit"
-        android:src="@drawable/mnnit" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="26dp">
+
+        <ImageView
+            android:layout_width="97dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/mnnit"
+            android:src="@drawable/mnnit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:id="@+id/mnnit"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:gravity="center|bottom"
+                android:text="@string/mnnit"
+                android:textColor="#859fc9"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:gravity="center|top"
+                android:text="@string/allahabad"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="298dp"
         android:layout_height="67dp"
         android:layout_above="@+id/passwordLayout"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:theme="@style/editText">
 
         <EditText
             android:id="@+id/edittxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/registration_number"
             android:drawableStart="@mipmap/user"
-            android:lines="1"
-            android:inputType="number"/>
+            android:hint="@string/registration_number"
+            android:inputType="number"
+            android:maxLength=""
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/passwordLayout"
         android:layout_width="298dp"
         android:layout_height="67dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:theme="@style/editText"
+        app:passwordToggleEnabled="true">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableEnd="@mipmap/password_visibile_off"
+            android:drawableStart="@mipmap/lock"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:drawableStart="@mipmap/lock"
-            android:drawableEnd="@mipmap/password_visibile_off"
-            android:maxLength="30"/>
+            android:maxLength="30" />
 
     </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:id="@+id/mnnit"
-        android:layout_width="252dp"
-        android:layout_height="70dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="116dp"
-        android:gravity="center|bottom"
-        android:text="@string/mnnit"
-        android:textColor="#859fc9"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignStart="@+id/passwordLayout"
+        android:text="@string/forgot_password"
+        android:textColor="#dbe0c8" />
 
-    <TextView
-        android:layout_width="252dp"
-        android:layout_height="70dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="116dp"
-        android:text="@string/allahabad"
-        android:layout_below="@+id/mnnit"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:gravity="center|top"/>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignEnd="@+id/passwordLayout"
+        android:layout_below="@+id/passwordLayout"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_button"
+        android:elevation="6dp"
+        android:foregroundTint="#b69d9e"
+        android:text="@string/sign_in" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:id="@+id/forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:text="@string/not_a_registered_user" />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#0aa0f7"
+            android:gravity="start"
+            android:text="@string/click_here" />
+
+    </LinearLayout>
 </RelativeLayout>
