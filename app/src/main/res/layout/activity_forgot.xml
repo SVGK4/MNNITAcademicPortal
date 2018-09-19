@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,5 +47,34 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/regd_number"
+        android:layout_width="298dp"
+        android:layout_height="67dp"
+        android:layout_centerInParent="true"
+        android:hint="@string/registration_number"
+        android:theme="@style/editText">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/user"
+            android:inputType="number"
+            android:maxLength="8"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_alignEnd="@+id/regd_number"
+        android:layout_below="@+id/regd_number"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_button"
+        android:elevation="6dp"
+        android:foregroundTint="#b69d9e"
+        android:text="@string/reset" />
 
 </RelativeLayout>

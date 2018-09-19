@@ -9,4 +9,7 @@
     <string name="click_here"> Click Here.</string>
     <string name="not_a_registered_user">Not a registered user?</string>
     <string name="title_activity_forgot">ForgotActivity</string>
+    <string name="reset">RESET</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
