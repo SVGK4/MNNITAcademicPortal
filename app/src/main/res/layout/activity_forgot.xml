@@ -72,7 +72,7 @@
         android:layout_alignEnd="@+id/regd_number"
         android:layout_below="@+id/regd_number"
         android:layout_marginTop="30dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/rectangle_corners"
         android:elevation="6dp"
         android:foregroundTint="#b69d9e"
         android:text="@string/reset" />

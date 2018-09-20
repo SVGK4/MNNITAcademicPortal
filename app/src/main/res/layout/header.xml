@@ -7,6 +7,13 @@
     android:orientation="vertical"
     android:background="#70aee9">
 
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/round_image"
+        android:src="@mipmap/user"
+        android:backgroundTint="#ffffff"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +22,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gopi Krishna"
-        android:layout_marginTop="16dp"/>
+        android:text="Gopi Krishna" />
 
 </LinearLayout>
