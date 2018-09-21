@@ -60,7 +60,7 @@
         android:theme="@style/editText">
 
         <EditText
-            android:id="@+id/edittxt"
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/user"
@@ -79,6 +79,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
+            android:id="@+id/user_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@mipmap/password_visibile_off"
@@ -93,13 +94,13 @@
         android:id="@+id/forgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button"
+        android:layout_alignBottom="@+id/sign_in"
         android:layout_alignStart="@+id/passwordLayout"
         android:text="@string/forgot_password"
         android:textColor="#dbe0c8" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/sign_in"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_alignEnd="@+id/passwordLayout"
