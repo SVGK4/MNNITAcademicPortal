@@ -33,13 +33,45 @@
                     android:layout_margin="8dp"
                     android:background="#e35d5d" />
 
-                <com.jjoe64.graphview.GraphView
-                    android:id="@+id/home_graph"
-                    android:layout_width="wrap_content"
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart"
+                    android:layout_width="208dp"
                     android:layout_height="151dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/student_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                android:text="Name : Surapaneni Venkata Gopi Krishna"/>
+
+            <TextView
+                android:id="@+id/student_registration_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                android:text="Regd. No : 20174063"/>
+
+            <TextView
+                android:id="@+id/student_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                android:text="Email : surapanenigopi44@gmail.com"/>
+
+            <TextView
+                android:id="@+id/student_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                android:text="NAME : Surapaneni Venkata Gopi Krishna"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
