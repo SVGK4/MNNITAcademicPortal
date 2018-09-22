@@ -8,11 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity implements BackgroundTask.BackroundResponse{
+public class LoginActivity extends AppCompatActivity implements BackgroundTask.BackroundResponse {
 
-    private TextView forgotPassword,registerBtn;
+    private TextView forgotPassword, registerBtn;
     private Button loginButton;
-    private EditText username,userpass;
+    private EditText username, userpass;
 
 
     @Override
@@ -24,13 +24,13 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         username = findViewById(R.id.user_name);
         userpass = findViewById(R.id.user_pass);
         registerBtn = findViewById(R.id.registerBtn);
-        
+
 
         //When Forgot Password is clicked
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent forgotIntent = new Intent(LoginActivity.this,ForgotActivity.class);
+                Intent forgotIntent = new Intent(LoginActivity.this, ForgotActivity.class);
                 startActivity(forgotIntent);
             }
         });
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
                 String method = "login";
                 BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
                 backgroundTask.delegate = LoginActivity.this;
-                backgroundTask.execute(method,user_name,user_pass);
+                backgroundTask.execute(method, user_name, user_pass);
             }
         });
 
@@ -60,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
 
     @Override
     public void processFinished(boolean result) {
-        if(result){
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        if (result) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
