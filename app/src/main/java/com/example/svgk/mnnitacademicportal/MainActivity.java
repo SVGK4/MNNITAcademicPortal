@@ -1,5 +1,6 @@
 package com.example.svgk.mnnitacademicportal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.go:
                         break;
+                    case R.id.fd:
+                        Intent forgotIntent = new Intent(MainActivity.this, FeedbackActivity.class);
+                        startActivity(forgotIntent);
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;

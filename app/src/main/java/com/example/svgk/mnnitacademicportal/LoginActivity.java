@@ -14,6 +14,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     private Button loginButton;
     private EditText username,userpass;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
