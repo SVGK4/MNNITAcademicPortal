@@ -2,10 +2,11 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+         Customize your theme here.
+        <item name="colorPrimary">@color/darkergray</item>
+        <item name="colorPrimaryDark">@color/darkergray</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@color/darkergray</item>
     </style>
 
     <style name="editText" parent="Theme.AppCompat.Light.NoActionBar">
@@ -20,5 +21,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+
 
 </resources>

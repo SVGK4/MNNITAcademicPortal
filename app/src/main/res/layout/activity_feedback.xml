@@ -12,6 +12,55 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="133dp"
+            android:layout_marginTop="29dp"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp"
+            android:paddingStart="26dp">
+
+            <ImageView
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/mnnit"
+                android:src="@drawable/mnnit" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp">
+
+                <TextView
+                    android:id="@+id/mnnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:gravity="center|bottom"
+                    android:text="@string/mnnit"
+                    android:textColor="#859fc9"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="79dp"
+                    android:gravity="center|top"
+                    android:text="@string/allahabad"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/fdList"
+            android:layout_width="298dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

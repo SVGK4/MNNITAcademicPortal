@@ -30,11 +30,12 @@
         <activity
             android:name=".ForgotActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".RegisterActivity"
-            android:parentActivityName=".LoginActivity"/>
+        <activity android:name=".RegisterActivity" />
         <activity
             android:name=".FeedbackActivity"
-            android:label="Course Feedback">
+            android:label="@string/course_feedback"
+            android:parentActivityName=".MainActivity">
+
         </activity>
     </application>
 

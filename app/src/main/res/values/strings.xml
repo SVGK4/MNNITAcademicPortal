@@ -17,6 +17,7 @@
     <string name="regNo">Registration Number</string>
     <string name="branch">Branch</string>
     <string name="semester">Semester</string>
+    <string name="course_feedback">Course Feedback</string>
 
 
     <string-array name="branch_array">
@@ -30,6 +31,15 @@
         <item>Production and Industrial</item>
         <item>Chemical Engineering</item>
         <item>Biotechnology</item>
+    </string-array>
+
+    <string-array name="feedback_array">
+        <item>--Select Course--</item>
+        <item>Data Structures</item>
+        <item>Foundation of Logical Thought</item>
+        <item>Analog and Digital Electronics</item>
+        <item>OOPs</item>
+        <item>Management of IT industries</item>
     </string-array>
 
     <string-array name="semester_array">
@@ -58,5 +68,5 @@
     <string name="register">register</string>
     <string name="phone">phone</string>
     <string name="Eml">Email</string>
-    <string name="course_feedback">Course Feedback</string>
+
 </resources>
