@@ -58,9 +58,38 @@
         <Spinner
             android:id="@+id/fdList"
             android:layout_width="298dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:theme="@style/editText">
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/feedbck"
+                android:hint="@string/course_feedback"
+                android:inputType="text"
+                android:maxLines="4" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/rectangle_corners"
+            android:elevation="6dp"
+            android:foregroundTint="#232122"
+            android:text="@string/send_feedback" />
+
 
     </LinearLayout>
 

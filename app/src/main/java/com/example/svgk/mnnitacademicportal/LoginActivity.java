@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         username = findViewById(R.id.user_name);
         userpass = findViewById(R.id.user_pass);
         registerBtn = findViewById(R.id.registerBtn);
-        
+
 
         //When Forgot Password is clicked
         forgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +45,10 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
                 BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
                 backgroundTask.delegate = LoginActivity.this;
                 backgroundTask.execute(method,user_name,user_pass);
+                //Intent splashIntent = new Intent(LoginActivity.this,MainActivity.class);
+                //startActivity(splashIntent);
+                //finish();
+
             }
         });
 
