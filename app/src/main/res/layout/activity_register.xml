@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="133dp"
+            android:layout_marginTop="29dp"
+            android:orientation="horizontal"
+            android:paddingEnd="16dp"
+            android:paddingStart="26dp">
+
+            <ImageView
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/mnnit"
+                android:src="@drawable/mnnit" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp">
+
+                <TextView
+                    android:id="@+id/mnnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="77dp"
+                    android:gravity="center|bottom"
+                    android:text="@string/mnnit"
+                    android:textColor="#859fc9"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="79dp"
+                    android:gravity="center|top"
+                    android:text="@string/allahabad"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:theme="@style/editText">
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/user"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:maxLength="30"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:theme="@style/editText"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/regNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/reg"
+                android:hint="@string/regNo"
+                android:inputType="number"
+                android:maxLength="8" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/getPassword"
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:theme="@style/editText"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/setPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@mipmap/password_visibile_off"
+                android:drawableStart="@mipmap/lock"
+                android:hint="@string/set_password"
+                android:inputType="textPassword"
+                android:maxLength="30" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/confirmPassword"
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:theme="@style/editText"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/confirmPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@mipmap/password_visibile_off"
+                android:drawableStart="@mipmap/lock"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:maxLength="30" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:theme="@style/editText">
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/mail"
+                android:hint="@string/Eml"
+                android:inputType="textEmailAddress"
+                android:maxLength="30" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:theme="@style/editText"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/phone"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                android:maxLength="10" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/getDob"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/select_date_of_birth"
+                tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@mipmap/date" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="298dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="298dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="298dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rectangle_corners"
+            android:elevation="6dp"
+            android:foregroundTint="#b69d9e"
+            android:text="@string/register" />
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
-    <item
-        android:id="@+id/home"
-        android:icon="@mipmap/home"
-        android:title="Home" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@mipmap/home"
+            android:title="Home" />
 
-    <item android:id="@+id/go"
-        android:title="Go"
-        android:icon="@mipmap/user"/>
+        <item
+            android:id="@+id/go"
+            android:icon="@mipmap/user"
+            android:title="Go" />
+
+        <item android:id="@+id/meraa"
+            android:title="Gopi"
+            android:icon="@mipmap/lock"/>
+
+    </group>
+
+    <item android:title="communicate">
+        <menu>
+            <item android:id="@+id/share"
+                android:title="share"
+                android:icon="@mipmap/password_visibile_off"/>
+
+            <item android:id="@+id/copy"
+            android:title="copy"
+            android:icon="@mipmap/password_visibile"/>
+        </menu>
+    </item>
+
+
 
 </menu>

@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">MNNIT Academic Portal</string>
     <string name="password">Password</string>
     <string name="registration_number">Registration Number</string>
@@ -12,7 +13,49 @@
     <string name="reset">RESET</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="name">Name</string>
+    <string name="regNo">Registration Number</string>
+    <string name="branch">Branch</string>
+    <string name="semester">Semester</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="branch_array">
+        <item>--Select Branch--</item>
+        <item>Computer Science And Engineering</item>
+        <item>Information Technology</item>
+        <item>Electronics and Communication Engineering</item>
+        <item>Electrical Engineering</item>
+        <item>Civil Engineering</item>
+        <item>Mechanical Engineering</item>
+        <item>Production and Industrial</item>
+        <item>Chemical Engineering</item>
+        <item>Biotechnology</item>
+    </string-array>
+
+    <string-array name="semester_array">
+        <item>--Select Semester--</item>
+        <item>First Semester</item>
+        <item>Second Semester</item>
+        <item>Third Semester</item>
+        <item>Fourth Semester</item>
+        <item>Fifth Semester</item>
+        <item>Sixth Semester</item>
+        <item>Seventh Semester</item>
+        <item>Eigth Semester</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>--Select Gender--</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="confirm_password">Confirm Password</string>
+    <string name="set_password">Set Password</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="select_date_of_birth">Select Date of Birth</string>
+    <string name="register">register</string>
+    <string name="phone">phone</string>
+    <string name="Eml">Email</string>
 </resources>

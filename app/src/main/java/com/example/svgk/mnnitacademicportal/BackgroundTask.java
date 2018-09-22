@@ -3,6 +3,7 @@ package com.example.svgk.mnnitacademicportal;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -20,11 +21,25 @@ import java.net.URLEncoder;
 
 public class BackgroundTask extends AsyncTask<String, Void, String> {
 
-    AlertDialog alertDialog;
+    private AlertDialog alertDialog;
     private Context ctx;
+    public BackroundResponse delegate = null;
+
+    public interface BackroundResponse{
+        void processFinished(boolean result);
+    }
 
     public BackgroundTask(Context context) {
         ctx = context;
+    }
+
+    private void storeInformation(String user_name,String user_pass){
+        SharedPreferences preferences = ctx.getSharedPreferences(
+                "loginInformation",Context.MODE_PRIVATE );
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user_name",user_name);
+        editor.putString("user_pass",user_pass);
+        editor.apply();
     }
 
     @Override
@@ -102,6 +117,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 }
                 bufferedReader.close();
                 Is.close();
+                storeInformation(user_name,user_pass);
                 return response;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -123,9 +139,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
         boolean login_status = Boolean.parseBoolean(result);
         if (login_status) {
+            delegate.processFinished(login_status);
             Toast.makeText(ctx, "Welcome", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
             alertDialog.setMessage("Enter correct details");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {

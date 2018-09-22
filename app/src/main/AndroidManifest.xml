@@ -20,13 +20,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait" />
         <activity android:name=".ForgotActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".RegisterActivity" />
     </application>
 
 </manifest>
