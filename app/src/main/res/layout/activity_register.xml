@@ -70,7 +70,7 @@
                 android:drawableStart="@mipmap/user"
                 android:hint="@string/name"
                 android:inputType="text"
-                android:maxLength="30"
+                android:maxLength="40"
                 android:maxLines="1" />
         </android.support.design.widget.TextInputLayout>
 

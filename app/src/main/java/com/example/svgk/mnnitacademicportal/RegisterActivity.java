@@ -20,13 +20,15 @@ import java.util.Calendar;
 
 public class RegisterActivity extends Activity {
 
-    Calendar calendar;
-    DatePickerDialog datePickerDialog;
-    EditText nameText, regNo, setPass, confirmPass, email, phone;
-    TextView dob;
-    Button register;
-    ImageView dateImg;
-    TextInputLayout til;
+    private Calendar calendar;
+    private DatePickerDialog datePickerDialog;
+    private EditText nameText, regNo, setPass, confirmPass, email, phone;
+    private TextView dob;
+    private Button register;
+    private ImageView dateImg;
+    private TextInputLayout til;
+    private String name, regno, setPas, confirmPas, mailId;
+    private String branch, db, contactNo, semester, gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,44 +86,53 @@ public class RegisterActivity extends Activity {
 
         //when register button is clicked
         register.setOnClickListener((View v) -> {
-
-            String name = nameText.getText().toString();
+            boolean anyErrors = false;
+            name = nameText.getText().toString();
             try {
-                String regno = regNo.getText().toString();
+                regno = regNo.getText().toString();
                 if (regno.length() != 8) {
                     regNo.setError("We know registration number is of 8 digits");
+                    anyErrors = true;
                 }
             } catch (Exception e) {
-
+                anyErrors = true;
             }
             try {
-                String setPas = setPass.getText().toString();
-                String confirmPas = confirmPass.getText().toString();
+                setPas = setPass.getText().toString();
+                confirmPas = confirmPass.getText().toString();
                 if (!setPas.equals(confirmPas)) {
                     til.setError("Passwords Do not match");
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    anyErrors = true;
                 }
             } catch (Exception e) {
-
+                anyErrors = true;
             }
             try {
-                String mailId = email.getText().toString();
+                mailId = email.getText().toString();
                 if (!isValidEmail(mailId)) {
                     email.setError("Enter valid Email");
+                    anyErrors = true;
                 }
             } catch (Exception e) {
-
+                anyErrors = true;
             }
             try {
-                String contactNo = phone.getText().toString();
-                String branch = spinner.getSelectedItem().toString();
-                String semester = spinner2.getSelectedItem().toString();
-                String Gender = spinner3.getSelectedItem().toString();
-                String db = dob.getText().toString();
+                contactNo = phone.getText().toString();
+                branch = spinner.getSelectedItem().toString();
+                semester = spinner2.getSelectedItem().toString();
+                gender = spinner3.getSelectedItem().toString();
+                db = dob.getText().toString();
             } catch (Exception e) {
-
+                Toast.makeText(this, "Invalid details", Toast.LENGTH_SHORT).show();
+                anyErrors = true;
             }
-            finish();
+
+            if(!anyErrors){
+                BackgroundTask backgroundTask = new BackgroundTask(this);
+                String method = "register";
+                backgroundTask.execute(method,regno,confirmPas,name,branch,semester,mailId,gender,contactNo,db);
+            }
         });
     }
 
