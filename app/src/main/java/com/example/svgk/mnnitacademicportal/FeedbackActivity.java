@@ -27,7 +27,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 String course = spinner.getSelectedItem().toString();
                 BackgroundTask backgroundTask = new BackgroundTask(FeedbackActivity.this);
                 String method = "feedback";
-                //backgroundTask.execute(method, );
+                //backgroundTask.execute(method,);
                 finish();
             }
         });
