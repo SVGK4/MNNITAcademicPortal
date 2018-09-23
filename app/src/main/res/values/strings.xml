@@ -69,6 +69,6 @@
     <string name="phone">phone</string>
     <string name="Eml">Email</string>
     <string name="enter_the_feedback">Enter The Feedback</string>
-    <string name="send_feedback">Send Feedback</string>
+    <string name="send_feedback">Submit</string>
 
 </resources>
