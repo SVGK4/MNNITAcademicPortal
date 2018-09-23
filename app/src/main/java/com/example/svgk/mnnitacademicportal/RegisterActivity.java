@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
 import java.util.Calendar;
 
 public class RegisterActivity extends Activity {
@@ -28,7 +29,7 @@ public class RegisterActivity extends Activity {
     private ImageView dateImg;
     private TextInputLayout til;
     private String name, regno, setPas, confirmPas, mailId;
-    private String branch, db, contactNo, semester, gender;
+    private String branch, db, contactNo, semester, gender, status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,15 +124,42 @@ public class RegisterActivity extends Activity {
                 semester = spinner2.getSelectedItem().toString();
                 gender = spinner3.getSelectedItem().toString();
                 db = dob.getText().toString();
+                status = "Requested";
+                MessageDigest md = MessageDigest.getInstance("SHA256");
+                md.reset();
+                md.update(confirmPas.getBytes("UTF-8"));
+                byte hashCode[] = md.digest();
+                StringBuilder generatedOutput = new StringBuilder();
+                for (int index = 0; index < hashCode.length; index++) {
+                    String hex = Integer.toHexString(0xFF & hashCode[index]);
+                    if (hex.length() == 1) {
+                        generatedOutput.append('0');
+                    }
+                    generatedOutput.append(hex);
+
+                }
+                confirmPas = generatedOutput.toString();
+                if (branch.equalsIgnoreCase("--Select Branch--")) {
+                    anyErrors = true;
+                    Toast.makeText(this, "Branch Cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+                if (semester.equalsIgnoreCase("--Select Semester--")) {
+                    anyErrors = true;
+                    Toast.makeText(this, "Semester cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+                if (gender.equalsIgnoreCase("--Select Gender--")) {
+                    anyErrors = true;
+                    Toast.makeText(this, "Gender cannot be empty", Toast.LENGTH_SHORT).show();
+                }
             } catch (Exception e) {
                 Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
                 anyErrors = true;
             }
 
-            if(!anyErrors){
+            if (!anyErrors) {
                 BackgroundTask backgroundTask = new BackgroundTask(this);
-            String method = "register";
-                backgroundTask.execute(method,regno,confirmPas,name,branch,semester,mailId,gender,contactNo,db);
+                String method = "register";
+                backgroundTask.execute(method, regno, confirmPas, name, branch, semester, mailId, gender, contactNo, db," ", status);
                 finish();
             }
         });
