@@ -2,7 +2,6 @@ package com.example.svgk.mnnitacademicportal;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -24,21 +23,22 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     private AlertDialog alertDialog;
     private Context ctx;
     public BackroundResponse delegate = null;
+    private String method;
 
-    public interface BackroundResponse{
-        void processFinished(boolean result);
+    public interface BackroundResponse {
+        void processFinished(String result);
     }
 
     public BackgroundTask(Context context) {
         ctx = context;
     }
 
-    private void storeInformation(String user_name,String user_pass){
+    private void storeInformation(String user_name, String user_pass) {
         SharedPreferences preferences = ctx.getSharedPreferences(
-                "loginInformation",Context.MODE_PRIVATE );
+                "loginInformation", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("user_name",user_name);
-        editor.putString("user_pass",user_pass);
+        editor.putString("user_name", user_name);
+        editor.putString("user_pass", user_pass);
         editor.apply();
     }
 
@@ -52,8 +52,10 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         String reg_url = "http://10.0.2.2/mnnit_database/register.php";
-        String log_url = "http://10.0.2.2/mnnit_database/login.php";
-        String method = params[0];
+        String log_url = "http://10.0.2.2/mnnit_database/user.php";
+        String admin_url = "http://10.0.2.2/mnnit_database/admin_user.php";
+        String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
+        method = params[0];
 
         if (method.equals("register")) {
 
@@ -84,21 +86,13 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                         URLEncoder.encode("gender", "UTF-8") + "=" + URLEncoder.encode(gender, "UTF-8") + "&" +
                         URLEncoder.encode("contact", "UTF-8") + "=" + URLEncoder.encode(contact, "UTF-8") + "&" +
                         URLEncoder.encode("db", "UTF-8") + "=" + URLEncoder.encode(db, "UTF-8") + "&" +
-                        URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8") ;
+                        URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 os.close();
                 InputStream Is = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Is, "ISO-8859-1"));
-                String response = "";
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    response += line;
-                }
-                bufferedReader.close();
-                Is.close();
-                return response;
+                return getResponse(Is);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -108,6 +102,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
             String user_name = params[1];
             String user_pass = params[2];
+
+            String JSON_String = null;
 
             try {
                 URL url = new URL(log_url);
@@ -123,48 +119,99 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 os.close();
-                InputStream Is = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Is, "ISO-8859-1"));
-                String response = "";
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    response += line;
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder builder = new StringBuilder();
+                while ((JSON_String = bufferedReader.readLine()) != null) {
+                    builder.append(JSON_String + "\n");
                 }
                 bufferedReader.close();
-                Is.close();
-                storeInformation(user_name,user_pass);
-                return response;
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return builder.toString().trim();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
+        } else if (method.equals("admin_user")) {
+            String JSON_String = null;
+            try {
+                URL url = new URL(admin_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder builder = new StringBuilder();
+                while ((JSON_String = bufferedReader.readLine()) != null) {
+                    builder.append(JSON_String + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return builder.toString().trim();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (method.equals("set_approve")) {
+            String user_name = params[1];
+            try {
+                URL url = new URL(approve_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream Is = httpURLConnection.getInputStream();
+                return getResponse(Is);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
     }
 
-    @Override
-    protected void onPostExecute(String result) {
-        //Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
-        if (result.equals("Successfully registered.") || result.equals("User already exists.")) {
-            Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
-            return;
+    private String getResponse(InputStream Is) {
+        String response = "";
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Is, "ISO-8859-1"));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                response += line;
+            }
+            bufferedReader.close();
+            Is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        boolean login_status = Boolean.parseBoolean(result);
-        if (login_status) {
-            delegate.processFinished(login_status);
+        return response;
+    }
+
+
+    @Override
+    protected void onPostExecute(String result) {
+
+        if (method.equals("register")) {
+            Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
+        } else if (method.equals("login")) {
+            delegate.processFinished(result);
             Toast.makeText(ctx, "Welcome", Toast.LENGTH_SHORT).show();
-        } else {
-            alertDialog.setMessage("Enter correct details");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    alertDialog.cancel();
-                }
-            });
-            alertDialog.show();
+        } else if (method.equals("admin_user")) {
+            delegate.processFinished(result);
+        } else if (method.equals("set_approve")) {
+            Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
         }
     }
 }

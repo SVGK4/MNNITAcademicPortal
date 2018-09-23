@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private LineChart mChart;
+    private TextView name,regd_no,email,contact;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -26,6 +28,15 @@ public class HomeFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_home,container,false);
 
         mChart = rootView.findViewById(R.id.chart);
+        name = rootView.findViewById(R.id.student_name);
+        regd_no = rootView.findViewById(R.id.student_registration_no);
+        email = rootView.findViewById(R.id.student_email);
+        contact = rootView.findViewById(R.id.student_phone_number);
+
+        name.setText("Name : " + User.getNAME());
+        regd_no.setText("Regd. No : " + User.getRegdNo());
+        email.setText("Email : " + User.getEMAIL());
+        contact.setText("Contact : " + User.getContactNo());
 
         setData(8);
         mChart.animateX(1000);
