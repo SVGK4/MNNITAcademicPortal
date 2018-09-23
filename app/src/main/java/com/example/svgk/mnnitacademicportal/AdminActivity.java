@@ -1,49 +1,55 @@
 package com.example.svgk.mnnitacademicportal;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity implements BackgroundTask.BackroundResponse {
 
     RecyclerView recyclerView;
     AdminListAdapter adapter;
     List<AdminUser> usersList;
+    Button approveBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        usersList = new ArrayList<>();
-
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        String url = "http://10.0.2.2/mnnit_database/admin_user.php";
 
         //gets users data from the background
-        getUsersBackground background = new getUsersBackground();
-        background.execute(url);
+        BackgroundTask background = new BackgroundTask(this);
+        background.delegate = AdminActivity.this;
+        final String method = "admin_user";
+        background.execute(method);
 
-        adapter = new AdminListAdapter(this,usersList);
+        approveBtn = findViewById(R.id.approve);
+        approveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String method1 = "set_approve";
+                BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
+                System.out.print(usersList.get(0).REGD_NO);
+                backgroundTask.execute("set_approve", usersList.get(0).REGD_NO);
+            }
+        });
+
+    }
+
+
+    @Override
+    public void processFinished(String result) {
+        usersList = QueryUtils.fetchUserData(result);
+        adapter = new AdminListAdapter(this, usersList);
         recyclerView.setAdapter(adapter);
     }
-
-    class getUsersBackground extends AsyncTask<String,Void,Void>{
-
-        @Override
-        protected Void doInBackground(String... params) {
-            String url = params[0];
-            usersList = QueryUtils.fetchUserData(url);
-            return null;
-        }
-    }
-
 }

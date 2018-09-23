@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.MessageDigest;
 
@@ -60,8 +65,8 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
 
                     }
                     user_pass = generatedOutput.toString();
-                    Log.i("hash","hash is" + user_pass);
-                }catch (Exception e) {
+                    Log.i("hash", "hash is" + user_pass);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 String method = "login";
@@ -82,11 +87,43 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     }
 
     @Override
-    public void processFinished(boolean result) {
-        if (result) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+    public void processFinished(String userJSON) {
+        try {
+
+            JSONObject baseJsonResponse = new JSONObject(userJSON);
+
+            // Extract the JSONArray associated with the key called "server_response",
+            // which represents a list of features (or users).
+            JSONArray userArray = baseJsonResponse.getJSONArray("server_response");
+
+            JSONObject currentUser = userArray.getJSONObject(0);
+
+            String reg_no = currentUser.getString("regd_no");
+            String name = currentUser.getString("name");
+            String branch = currentUser.getString("branch");
+            String mail_id = currentUser.getString("email");
+            String db = currentUser.getString("dob");
+            String contact = currentUser.getString("contact");
+            String gender = currentUser.getString("gender");
+            String address = currentUser.getString("address");
+            String user_pass = currentUser.getString("user_pass");
+            String semester = currentUser.getString("semester");
+            String status = currentUser.getString("status");
+            if (status.equals("Approved")) {
+                User user = new User(name, reg_no, user_pass, mail_id, contact, db, branch, semester, gender, address);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (JSONException e) {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e("QueryUtils", "Problem parsing the user JSON results", e);
+            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
         }
     }
 

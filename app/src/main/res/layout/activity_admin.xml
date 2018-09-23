@@ -8,9 +8,17 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/approve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="approve"
+        android:textColor="#f9f6be"
+        android:background="@drawable/rectangle_corners"/>
 
 </LinearLayout>

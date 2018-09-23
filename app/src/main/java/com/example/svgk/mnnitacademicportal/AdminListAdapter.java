@@ -18,7 +18,6 @@ public class AdminListAdapter extends RecyclerView.Adapter<AdminListAdapter.Admi
     public AdminListAdapter(Context mCtx,List<AdminUser> userList){
         this.mContext = mCtx;
         this.userList = userList;
-
     }
 
     @NonNull
