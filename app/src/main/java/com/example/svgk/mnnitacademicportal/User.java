@@ -18,6 +18,7 @@ public class User {
 
         User.NAME = NAME;
         User.REGD_NO = REGD_NO;
+
         User.PASSWORD = PASSWORD;
         User.EMAIL = EMAIL;
         User.CONTACT_NO = CONTACT_NO;
