@@ -41,7 +41,7 @@ public class AdminActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... params) {
             String url = params[0];
-            usersList = QueryUtils.fetchEarthquakeData(url);
+            usersList = QueryUtils.fetchUserData(url);
             return null;
         }
     }

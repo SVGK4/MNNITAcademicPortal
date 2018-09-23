@@ -178,7 +178,7 @@ public final class QueryUtils {
     /**
      * Query the USGS dataset and return a list of {@link AdminUser} objects.
      */
-    public static List<AdminUser> fetchuserData(String requestUrl) {
+    public static List<AdminUser> fetchUserData(String requestUrl) {
 
 
         // Create URL object
