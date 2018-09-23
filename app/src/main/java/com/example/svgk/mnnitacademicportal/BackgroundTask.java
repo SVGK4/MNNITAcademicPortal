@@ -90,7 +90,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 InputStream Is = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Is, "ISO-8859-1"));
                 String response = "";
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     response += line;
                 }
@@ -124,7 +124,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 InputStream Is = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Is, "ISO-8859-1"));
                 String response = "";
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     response += line;
                 }
@@ -145,6 +145,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        //Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
         if (result.equals("Successfully registered.") || result.equals("User already exists.")) {
             Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
             return;
@@ -158,6 +159,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             alertDialog.setMessage("Enter correct details");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.cancel();
                 }
             });
             alertDialog.show();

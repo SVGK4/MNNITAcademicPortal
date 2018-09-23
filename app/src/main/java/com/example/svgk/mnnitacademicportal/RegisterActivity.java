@@ -124,14 +124,15 @@ public class RegisterActivity extends Activity {
                 gender = spinner3.getSelectedItem().toString();
                 db = dob.getText().toString();
             } catch (Exception e) {
-                Toast.makeText(this, "Invalid details", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
                 anyErrors = true;
             }
 
             if(!anyErrors){
                 BackgroundTask backgroundTask = new BackgroundTask(this);
-                String method = "register";
+            String method = "register";
                 backgroundTask.execute(method,regno,confirmPas,name,branch,semester,mailId,gender,contactNo,db);
+                finish();
             }
         });
     }
