@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
 
@@ -51,7 +50,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
                         "Delete",
                         0,
-                        Color.parseColor("#FF3C30"),
+                        Color.parseColor("#"),
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(int pos) {

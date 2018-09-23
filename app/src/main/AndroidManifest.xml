@@ -40,7 +40,7 @@
             android:parentActivityName=".MainActivity"
             />
         <activity
-            android:name=".MailActivity"
+            android:name=".EmailActivity"
             android:label="@string/em"></activity>
     </application>
 

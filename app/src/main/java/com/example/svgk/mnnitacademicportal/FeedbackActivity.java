@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 public class FeedbackActivity extends AppCompatActivity {
+
+    private EditText feedback;
+    private Button submitFeedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +23,16 @@ public class FeedbackActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        EditText feedback = findViewById(R.id.fd);
-        feedback.setOnClickListener(new View.OnClickListener() {
+        feedback = findViewById(R.id.name);
+        submitFeedback = findViewById(R.id.submit_feedback);
+        submitFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String feed = feedback.getText().toString();
                 String course = spinner.getSelectedItem().toString();
                 BackgroundTask backgroundTask = new BackgroundTask(FeedbackActivity.this);
                 String method = "feedback";
-                //backgroundTask.execute(method,);
+                backgroundTask.execute(method,User.getNAME(),User.getRegdNo(),course,feed);
                 finish();
             }
         });

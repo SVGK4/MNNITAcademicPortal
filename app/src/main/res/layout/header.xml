@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/header"
     android:paddingTop="50dp"
     android:paddingStart="16dp"
     android:orientation="vertical"
@@ -36,7 +37,7 @@
         tools:text="20174063"/>
 
    <TextView
-       android:id="@+id/student_branch"
+       android:id="@+id/student_branch_navigation"
        android:layout_marginTop="8dp"
        android:textSize="16sp"
        android:layout_marginBottom="4dp"

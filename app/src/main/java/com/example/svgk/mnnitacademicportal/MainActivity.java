@@ -10,11 +10,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private TextView name,regd_no,branch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+
+        View header = navigationView.getHeaderView(0);
+
+        name = header.findViewById(R.id.student_name_navigation);
+        regd_no = header.findViewById(R.id.student_regd_no_navigation);
+        branch = header.findViewById(R.id.student_branch_navigation);
+
+        name.setText(User.getNAME());
+        regd_no.setText(User.getRegdNo());
+        branch.setText(User.getBRANCH());
+
+
 
         //Drawer Layout
         mDrawerLayout = findViewById(R.id.drawer);
@@ -29,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
