@@ -44,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.fd:
                         Intent forgotIntent = new Intent(MainActivity.this, FeedbackActivity.class);
                         startActivity(forgotIntent);
+                        break;
+                    case R.id.logOut:
+                        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(loginIntent);
+                        finish();
+                        break;
+                    case R.id.admin:
+                        Intent intent = new Intent(MainActivity.this,AdminActivity.class);
+                        startActivity(intent);
+                        break;
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;

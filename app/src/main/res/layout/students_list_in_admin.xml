@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="6dp"
+    android:layout_marginBottom="8dp"
+    card_view:cardBackgroundColor="#f5f6e2"
+    card_view:cardCornerRadius="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/student_name_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Name : surapaneni venkata gopi krishna"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/student_registration_no_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Regd.No : 20174063"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/student_branch_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Branch : computer Sciense and engineering"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/student_email_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Email : surapanenigoi44@gmail.com"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
