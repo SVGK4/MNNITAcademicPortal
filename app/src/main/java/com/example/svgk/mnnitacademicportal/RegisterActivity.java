@@ -29,7 +29,7 @@ public class RegisterActivity extends Activity {
     private ImageView dateImg;
     private TextInputLayout til;
     private String name, regno, setPas, confirmPas, mailId;
-    private String branch, db, contactNo, semester, gender, status;
+    private String branch, db, contactNo, gender, status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +54,6 @@ public class RegisterActivity extends Activity {
                 this, R.array.branch_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
-        Spinner spinner2 = findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
-                this, R.array.semester_array, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
 
         Spinner spinner3 = findViewById(R.id.spinner3);
         ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(
@@ -121,7 +115,6 @@ public class RegisterActivity extends Activity {
             try {
                 contactNo = phone.getText().toString();
                 branch = spinner.getSelectedItem().toString();
-                semester = spinner2.getSelectedItem().toString();
                 gender = spinner3.getSelectedItem().toString();
                 db = dob.getText().toString();
                 status = "Requested";
@@ -143,10 +136,6 @@ public class RegisterActivity extends Activity {
                     anyErrors = true;
                     Toast.makeText(this, "Branch Cannot be empty", Toast.LENGTH_SHORT).show();
                 }
-                if (semester.equalsIgnoreCase("--Select Semester--")) {
-                    anyErrors = true;
-                    Toast.makeText(this, "Semester cannot be empty", Toast.LENGTH_SHORT).show();
-                }
                 if (gender.equalsIgnoreCase("--Select Gender--")) {
                     anyErrors = true;
                     Toast.makeText(this, "Gender cannot be empty", Toast.LENGTH_SHORT).show();
@@ -159,7 +148,7 @@ public class RegisterActivity extends Activity {
             if (!anyErrors) {
                 BackgroundTask backgroundTask = new BackgroundTask(this);
                 String method = "register";
-                backgroundTask.execute(method, regno, confirmPas, name, branch, semester, mailId, gender, contactNo, db," ", status);
+                backgroundTask.execute(method, regno, confirmPas, name, branch, mailId, gender, contactNo, db," ", status);
                 finish();
             }
         });
