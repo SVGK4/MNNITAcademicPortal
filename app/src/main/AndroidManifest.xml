@@ -38,6 +38,8 @@
             android:parentActivityName=".MainActivity">
 
         </activity>
+        <activity android:name=".AdminActivity"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

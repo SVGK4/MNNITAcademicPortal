@@ -36,6 +36,14 @@
                 android:title="Feedback"
                 android:icon="@mipmap/feedbck"/>
 
+            <item android:id="@+id/logOut"
+                android:title="Logout"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"/>
+
+            <item android:id="@+id/admin"
+                android:title="admin"
+                android:icon="@mipmap/user"/>
+
         </menu>
     </item>
 
