@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     public void processFinished(String userJSON) {
         try {
 
+            Toast.makeText(this, userJSON, Toast.LENGTH_SHORT).show();
             JSONObject baseJsonResponse = new JSONObject(userJSON);
 
             // Extract the JSONArray associated with the key called "server_response",

@@ -68,6 +68,8 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                                 BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
                                 System.out.print(usersList.get(0).REGD_NO);
                                 backgroundTask.execute("set_approve", usersList.get(pos).REGD_NO);
+                                usersList.remove(pos);
+                                adapter.notifyItemRemoved(pos);
                             }
                         }
                 ));
