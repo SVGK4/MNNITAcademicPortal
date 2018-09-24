@@ -113,15 +113,13 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
                 User user = new User(name, reg_no, user_pass, mail_id, contact, db, branch, semester, gender, address);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+                Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
                 finish();
             }else{
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
 
         } catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
             Log.e("QueryUtils", "Problem parsing the user JSON results", e);
             Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
         }

@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
                 String encodeImage = imageToString(imageBitmap);
                 BackgroundTask backgroundTask = new BackgroundTask(getContext());
                 String method = "sendImage";
-                backgroundTask.execute(method,encodeImage);
+                backgroundTask.execute(method,encodeImage,User.getRegdNo());
             }
         });
 

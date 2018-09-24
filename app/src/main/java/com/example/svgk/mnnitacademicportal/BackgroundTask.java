@@ -208,17 +208,19 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
 
-        }else if(method.equals("image_url")){
+        }else if(method.equals("sendImage")){
             String encoded_image = params[1];
+            String regd_no = params[2];
             try {
-                URL url = new URL(approve_url);
+                URL url = new URL(image_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
                 OutputStream os = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                String data = URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(encoded_image, "UTF-8");
+                String data = URLEncoder.encode("regd_no", "UTF-8") + "=" + URLEncoder.encode(regd_no, "UTF-8") + "&" +
+                        URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(encoded_image, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -260,7 +262,6 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
         } else if (method.equals("login")) {
             delegate.processFinished(result);
-            Toast.makeText(ctx, "Welcome", Toast.LENGTH_SHORT).show();
         } else if (method.equals("admin_user")) {
             delegate.processFinished(result);
         } else if (method.equals("set_approve")) {

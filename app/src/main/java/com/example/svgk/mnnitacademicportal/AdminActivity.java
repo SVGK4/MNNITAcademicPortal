@@ -48,7 +48,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "Delete",
+                        "Profile",
                         0,
                         Color.parseColor("#ffffff"),
                         new SwipeHelper.UnderlayButtonClickListener() {
@@ -60,7 +60,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 ));
 
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "Transfer",
+                        "Deny",
                         0,
                         Color.parseColor("#FF9502"),
                         new SwipeHelper.UnderlayButtonClickListener() {
@@ -71,7 +71,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                         }
                 ));
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "Unshare",
+                        "Approve",
                         0,
                         Color.parseColor("#C7C7CB"),
                         new SwipeHelper.UnderlayButtonClickListener() {
