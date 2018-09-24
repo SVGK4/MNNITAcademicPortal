@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     private TextView forgotPassword, registerBtn;
     private Button loginButton;
     private EditText username, userpass;
-
+    private String user_name,user_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user_name = username.getText().toString();
-                String user_pass = userpass.getText().toString();
+                user_name = username.getText().toString();
+                user_pass = userpass.getText().toString();
                 try {
                     MessageDigest md = null;
                     md = MessageDigest.getInstance("SHA256");
@@ -69,10 +69,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String method = "login";
-                BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
-                backgroundTask.delegate = LoginActivity.this;
-                backgroundTask.execute(method, user_name, user_pass);
+                confirmLogin();
             }
         });
 
@@ -86,15 +83,18 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         });
     }
 
+    private void confirmLogin(){
+        String method = "login";
+        BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
+        backgroundTask.delegate = LoginActivity.this;
+        backgroundTask.execute(method, user_name, user_pass);
+    }
+
     @Override
     public void processFinished(String userJSON) {
         try {
-
-            Toast.makeText(this, userJSON, Toast.LENGTH_SHORT).show();
             JSONObject baseJsonResponse = new JSONObject(userJSON);
 
-            // Extract the JSONArray associated with the key called "server_response",
-            // which represents a list of features (or users).
             JSONArray userArray = baseJsonResponse.getJSONArray("server_response");
 
             JSONObject currentUser = userArray.getJSONObject(0);
