@@ -50,7 +50,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
                         "Delete",
                         0,
-                        Color.parseColor("#"),
+                        Color.parseColor("#ffffff"),
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(int pos) {

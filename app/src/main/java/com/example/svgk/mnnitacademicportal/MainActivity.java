@@ -1,6 +1,8 @@
 package com.example.svgk.mnnitacademicportal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private TextView name,regd_no,branch;
+    Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +30,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
+        String url = "http://10.0.2.2/mnnit_database/image_connection.php";
+
         View header = navigationView.getHeaderView(0);
 
         name = header.findViewById(R.id.student_name_navigation);
         regd_no = header.findViewById(R.id.student_regd_no_navigation);
         branch = header.findViewById(R.id.student_branch_navigation);
+        imageBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.mnnit);
 
         name.setText(User.getNAME());
         regd_no.setText(User.getRegdNo());
@@ -80,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
             navigationView.setCheckedItem(R.id.home);
         }
 
+
+
     }
 
     @Override
@@ -98,4 +106,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
 }
