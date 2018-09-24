@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
         setSupportActionBar(toolbar);
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
-        String url = "http://10.0.2.2/mnnit_database/image_connection.php";
-
         View header = navigationView.getHeaderView(0);
 
         name = header.findViewById(R.id.student_name_navigation);
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
         photo.setImageBitmap(HomeFragment.imageBitmap);
 
         BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.delegate = MainActivity.this;
+        backgroundTask.delegate = this;
         String method = "recieve_image";
         backgroundTask.execute(method, User.getRegdNo());
 
@@ -135,5 +133,8 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
         byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
         HomeFragment.imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         photo.setImageBitmap(HomeFragment.imageBitmap);
+        ImageView image = findViewById(R.id.student_photo);
+        image.setImageBitmap(HomeFragment.imageBitmap);
+
     }
 }
