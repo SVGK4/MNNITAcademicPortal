@@ -56,6 +56,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         String admin_url = "http://10.0.2.2/mnnit_database/admin_user.php";
         String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
         String feedback_url = "http://10.0.2.2/mnnit_database/feedback.php";
+        String image_url = "http://10.0.2.2/mnnit_database/image_connection.php";
+
         method = params[0];
 
         if (method.equals("register")) {
@@ -206,6 +208,28 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
 
+        }else if(method.equals("image_url")){
+            String encoded_image = params[1];
+            try {
+                URL url = new URL(approve_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(encoded_image, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream Is = httpURLConnection.getInputStream();
+                return getResponse(Is);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
