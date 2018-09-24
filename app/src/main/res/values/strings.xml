@@ -71,5 +71,7 @@
     <string name="enter_the_feedback">Enter The Feedback</string>
     <string name="send_feedback">Submit</string>
     <string name="em">Email Students</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="subject">Subject</string>
 
 </resources>

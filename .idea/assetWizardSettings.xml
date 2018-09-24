@@ -63,7 +63,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/home/manasabhilash/Tools/android-studio-ide-173.4907809-linux/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_exit_to_app_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/home/manasabhilash/Tools/android-studio-ide-173.4907809-linux/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_subject_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -74,7 +74,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="outputName" value="logut" />
+                                      <entry key="outputName" value="sub" />
                                     </map>
                                   </option>
                                 </PersistentState>

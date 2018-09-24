@@ -159,8 +159,7 @@
             android:layout_width="298dp"
             android:layout_height="67dp"
             android:layout_gravity="center"
-            android:theme="@style/editText"
-            app:passwordToggleEnabled="true">
+            android:theme="@style/editText">
 
             <EditText
                 android:id="@+id/phone"
