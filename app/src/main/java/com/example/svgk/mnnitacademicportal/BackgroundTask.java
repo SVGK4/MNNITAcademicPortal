@@ -58,7 +58,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         String approve_url = "https://server-manasabhilash.c9users.io/set_approve.php";
         String feedback_url = "https://server-manasabhilash.c9users.io/feedback.php";
         String image_url = "https://server-manasabhilash.c9users.io/image_connection.php";
-        String denyApproval = "https://server-manasabhilash.c9users.io/denyApproval.php";
+        String deny_url = "https://server-manasabhilash.c9users.io/denyApproval.php";
 
         method = params[0];
 
@@ -237,7 +237,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         }else if(method.equals("deny_approval")) {
             String regd_no = params[1];
             try{
-                URL url = new URL(denyApproval);
+                URL url = new URL(deny_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
