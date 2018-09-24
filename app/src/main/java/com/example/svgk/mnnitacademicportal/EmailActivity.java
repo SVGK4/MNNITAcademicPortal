@@ -7,14 +7,13 @@ import android.widget.EditText;
 
 public class EmailActivity extends Activity {
 
-    EditText editTextEmail, editTextSubject, editTextMessage;
+    EditText editTextSubject, editTextMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
 
-        editTextEmail = findViewById(R.id.email);
         editTextSubject = findViewById(R.id.subject);
         editTextMessage = findViewById(R.id.multiText);
 
@@ -24,7 +23,7 @@ public class EmailActivity extends Activity {
     }
 
     private void sendEmail() {
-        String email = editTextEmail.getText().toString().trim();
+        String email = "";
         String subject = editTextSubject.getText().toString().trim();
         String message = editTextMessage.getText().toString().trim();
         SendMail sm = new SendMail(this, email, subject, message);

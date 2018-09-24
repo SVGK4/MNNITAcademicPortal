@@ -73,5 +73,8 @@
     <string name="em">Email Students</string>
     <string name="enter_email">Enter Email</string>
     <string name="subject">Subject</string>
+    <string name="destination_email">Destination Email</string>
+    <string name="compose">Compose</string>
+    <string name="click_me">CLick Me</string>
 
 </resources>
