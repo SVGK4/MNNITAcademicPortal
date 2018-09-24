@@ -1,5 +1,6 @@
 package com.example.svgk.mnnitacademicportal;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
     RecyclerView recyclerView;
     AdminListAdapter adapter;
     List<AdminUser> usersList;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
         BackgroundTask background = new BackgroundTask(this);
         background.delegate = AdminActivity.this;
         final String method = "admin_user";
+        progressDialog = ProgressDialog.show(AdminActivity.this,"Getting Details    ","Please wait...",false,false);
+
         background.execute(method);
 
         SwipeHelper swipeHelper = new SwipeHelper(this, recyclerView) {
@@ -53,6 +57,12 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                             @Override
                             public void onClick(int pos) {
                                 // TODO: OnTransfer
+                                String method1 = "deny_approval";
+                                BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
+                                System.out.print(usersList.get(0).REGD_NO);
+                                backgroundTask.execute("deny_approval", usersList.get(pos).REGD_NO);
+                                usersList.remove(pos);
+                                adapter.notifyItemRemoved(pos);
                             }
                         }
                 ));
@@ -79,6 +89,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
 
     @Override
     public void processFinished(String result) {
+        progressDialog.dismiss();
         usersList = QueryUtils.fetchUserData(result);
         adapter = new AdminListAdapter(this, usersList);
         recyclerView.setAdapter(adapter);
