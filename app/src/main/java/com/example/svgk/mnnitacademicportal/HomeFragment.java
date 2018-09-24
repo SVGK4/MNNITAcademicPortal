@@ -28,24 +28,23 @@ import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
     private LineChart mChart;
-    private TextView name,regd_no,email,contact;
+    private TextView name, regd_no, email, contact;
     private ImageView photo;
     private Button upload;
-    private Bitmap imageBitmap;
+    static Bitmap imageBitmap = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView =  inflater.inflate(R.layout.fragment_home,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mChart = rootView.findViewById(R.id.chart);
         name = rootView.findViewById(R.id.student_name);
         regd_no = rootView.findViewById(R.id.student_registration_no);
         email = rootView.findViewById(R.id.student_email);
         contact = rootView.findViewById(R.id.student_phone_number);
-        photo = rootView.findViewById(R.id.student_photo);
         photo = rootView.findViewById(R.id.student_photo);
         upload = rootView.findViewById(R.id.button);
 
@@ -56,10 +55,13 @@ public class HomeFragment extends Fragment {
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
             }
         });
-        photo.setImageResource(R.mipmap.back_arrow);
+        //photo.setImageResource(R.mipmap.back_arrow);
+        if(imageBitmap != null) {
+            photo.setImageBitmap(imageBitmap);
+        }
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +69,7 @@ public class HomeFragment extends Fragment {
                 String encodeImage = imageToString(imageBitmap);
                 BackgroundTask backgroundTask = new BackgroundTask(getContext());
                 String method = "uploadImage";
-                backgroundTask.execute(method,encodeImage,User.getRegdNo());
+                backgroundTask.execute(method, encodeImage, User.getRegdNo());
             }
         });
 
@@ -105,7 +107,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1 && resultCode == RESULT_OK){
+        if (requestCode == 1 && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             try {
                 imageBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
@@ -116,12 +118,12 @@ public class HomeFragment extends Fragment {
 
         }
 
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private String imageToString(Bitmap bitmap){
+    private String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         byte[] imageBytes = outputStream.toByteArray();
         String encodeImage = android.util.Base64.encodeToString(imageBytes, android.util.Base64.DEFAULT);
         return encodeImage;

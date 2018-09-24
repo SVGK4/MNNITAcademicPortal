@@ -1,8 +1,6 @@
 package com.example.svgk.mnnitacademicportal;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private TextView name,regd_no,branch;
-    Bitmap imageBitmap;
+    private ImageView photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
         name = header.findViewById(R.id.student_name_navigation);
         regd_no = header.findViewById(R.id.student_regd_no_navigation);
         branch = header.findViewById(R.id.student_branch_navigation);
-        imageBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.mnnit);
+        photo = header.findViewById(R.id.student_photo_navigation);
 
         name.setText(User.getNAME());
         regd_no.setText(User.getRegdNo());
         branch.setText(User.getBRANCH());
+
+        photo.setImageBitmap(HomeFragment.imageBitmap);
 
 
 

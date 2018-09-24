@@ -75,10 +75,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 ));
             }
         };
-
-
     }
-
 
     @Override
     public void processFinished(String result) {

@@ -15,7 +15,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@drawable/round_image"
-        tools:src="@mipmap/user"
+        android:src="@mipmap/user"
         android:backgroundTint="#ffffff"/>
 
     <TextView
