@@ -39,7 +39,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
                         "Profile",
-                        0,
+                        R.mipmap.profile,
                         Color.parseColor("#ffffff"),
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
@@ -51,7 +51,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
 
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
                         "Deny",
-                        0,
+                        R.mipmap.deny,
                         Color.parseColor("#FF9502"),
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
@@ -67,7 +67,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 ));
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
                         "Approve",
-                        0,
+                        R.mipmap.approve,
                         Color.parseColor("#C7C7CB"),
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override

@@ -1,6 +1,8 @@
 package com.example.svgk.mnnitacademicportal;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +26,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
 
     public static final int BUTTON_WIDTH = 200;
     private RecyclerView recyclerView;
+    private static Context ctx;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
     private int swipedPos = -1;
@@ -71,6 +74,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
         super(0, ItemTouchHelper.LEFT);
         this.recyclerView = recyclerView;
         this.buttons = new ArrayList<>();
+        ctx = context;
         this.gestureDetector = new GestureDetector(context, gestureListener);
         this.recyclerView.setOnTouchListener(onTouchListener);
         buttonsBuffer = new HashMap<>();
@@ -219,7 +223,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
             return false;
         }
 
-        public void onDraw(Canvas c, RectF rect, int pos){
+        private void onDraw(Canvas c, RectF rect, int pos){
             Paint p = new Paint();
 
             // Draw background
@@ -233,6 +237,9 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
             Rect r = new Rect();
             float cHeight = rect.height();
             float cWidth = rect.width();
+            p.setTextSize(40);
+            Bitmap bitmap = BitmapFactory.decodeResource(ctx.getResources(),imageResId);
+            c.drawBitmap(bitmap, null, rect, p);
             p.setTextAlign(Paint.Align.LEFT);
             p.getTextBounds(text, 0, text.length(), r);
             float x = cWidth / 2f - r.width() / 2f - r.left;

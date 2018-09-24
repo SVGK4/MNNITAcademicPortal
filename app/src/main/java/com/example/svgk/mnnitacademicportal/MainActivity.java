@@ -130,11 +130,15 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
 
     @Override
     public void processFinished(String result) {
-        byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
-        HomeFragment.imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        photo.setImageBitmap(HomeFragment.imageBitmap);
-        ImageView image = findViewById(R.id.student_photo);
-        image.setImageBitmap(HomeFragment.imageBitmap);
+        try {
+            byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
+            HomeFragment.imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            photo.setImageBitmap(HomeFragment.imageBitmap);
+            ImageView image = findViewById(R.id.student_photo);
+            image.setImageBitmap(HomeFragment.imageBitmap);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 }
