@@ -1,7 +1,9 @@
 package com.example.svgk.mnnitacademicportal;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     private TextView forgotPassword, registerBtn;
     private Button loginButton;
     private EditText username, userpass;
+    private String user_name,user_pass;
     private ProgressDialog progressDialog;
 
     @Override
@@ -33,6 +36,15 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         username = findViewById(R.id.user_name);
         userpass = findViewById(R.id.user_pass);
         registerBtn = findViewById(R.id.registerBtn);
+
+        SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
+        user_name = preferences.getString("user_name","");
+        user_pass = preferences.getString("user_pass","");
+
+        if(!user_name.equals("") && !user_name.equals("")){
+            progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
+            confirmLogin();
+        }
 
 
         //When Forgot Password is clicked
@@ -48,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user_name = username.getText().toString();
-                String user_pass = userpass.getText().toString();
+                user_name = username.getText().toString();
+                user_pass = userpass.getText().toString();
                 progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
                 try {
                     MessageDigest md = null;
@@ -71,10 +83,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String method = "login";
-                BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
-                backgroundTask.delegate = LoginActivity.this;
-                backgroundTask.execute(method, user_name, user_pass);
+                confirmLogin();
             }
         });
 
@@ -88,14 +97,18 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         });
     }
 
+    private void confirmLogin(){
+        String method = "login";
+        BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
+        backgroundTask.delegate = LoginActivity.this;
+        backgroundTask.execute(method, user_name, user_pass);
+    }
+
     @Override
     public void processFinished(String userJSON) {
         try {
-
             JSONObject baseJsonResponse = new JSONObject(userJSON);
 
-            // Extract the JSONArray associated with the key called "server_response",
-            // which represents a list of features (or users).
             JSONArray userArray = baseJsonResponse.getJSONArray("server_response");
 
             JSONObject currentUser = userArray.getJSONObject(0);
@@ -120,6 +133,12 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             }else{
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
+            Context context = getApplicationContext();
+            SharedPreferences preferences = context.getSharedPreferences("login",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("user_name",user_name);
+            editor.putString("user_pass",user_pass);
+            editor.apply();
             progressDialog.dismiss();
 
         } catch (JSONException e) {
