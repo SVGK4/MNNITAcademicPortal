@@ -1,7 +1,9 @@
 package com.example.svgk.mnnitacademicportal;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -34,6 +36,15 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         username = findViewById(R.id.user_name);
         userpass = findViewById(R.id.user_pass);
         registerBtn = findViewById(R.id.registerBtn);
+
+        SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
+        user_name = preferences.getString("user_name","");
+        user_pass = preferences.getString("user_pass","");
+
+        if(!user_name.equals("") && !user_name.equals("")){
+            progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
+            confirmLogin();
+        }
 
 
         //When Forgot Password is clicked
@@ -122,9 +133,16 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             }else{
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
+            Context context = getApplicationContext();
+            SharedPreferences preferences = context.getSharedPreferences("login",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("user_name",user_name);
+            editor.putString("user_pass",user_pass);
+            editor.apply();
             progressDialog.dismiss();
 
         } catch (JSONException e) {
+            progressDialog.dismiss();
             Log.e("QueryUtils", "Problem parsing the user JSON results", e);
             Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
         }
