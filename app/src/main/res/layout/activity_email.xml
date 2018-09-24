@@ -53,6 +53,7 @@
 
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/a"
         android:layout_width="match_parent"
         android:layout_height="67dp"
         android:layout_alignParentLeft="true"
@@ -75,5 +76,14 @@
 
         </EditText>
     </android.support.design.widget.TextInputLayout>
+    
+    <Button
+        android:id="@+id/emailBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/a"
+        android:text="CLick Me">
+
+    </Button>
 
 </RelativeLayout>
