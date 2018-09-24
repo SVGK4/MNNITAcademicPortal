@@ -14,14 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -30,8 +23,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -40,7 +31,6 @@ public class HomeFragment extends Fragment {
     private TextView name,regd_no,email,contact;
     private ImageView photo;
     private Button upload;
-    private String url = "http://10.0.2.2/mnnit_database/image_connection.php";
     private Bitmap imageBitmap;
 
     @Nullable
@@ -74,30 +64,10 @@ public class HomeFragment extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                        url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener(){
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String,String> params = new HashMap<>();
-                        String imageData = imageToString(imageBitmap);
-                        params.put("image",imageData);
-
-                        return params;
-                    }
-                };
-                RequestQueue queue = Volley.newRequestQueue(getContext());
-                queue.add(stringRequest);
+                String encodeImage = imageToString(imageBitmap);
+                BackgroundTask backgroundTask = new BackgroundTask(getContext());
+                String method = "sendImage";
+                backgroundTask.execute(method,encodeImage);
             }
         });
 
