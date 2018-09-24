@@ -259,7 +259,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         } else if (method.equals("recieve_image")) {
             String regd_no = params[1];
             try {
-                URL url = new URL(image_url);
+                URL url = new URL(image_receive_utl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);

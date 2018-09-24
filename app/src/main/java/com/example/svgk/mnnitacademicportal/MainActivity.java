@@ -3,6 +3,7 @@ package com.example.svgk.mnnitacademicportal;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -130,8 +132,8 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
 
     @Override
     public void processFinished(String result) {
-//        byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
-//        HomeFragment.imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//        photo.setImageBitmap(HomeFragment.imageBitmap);
+        byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
+        HomeFragment.imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        photo.setImageBitmap(HomeFragment.imageBitmap);
     }
 }
