@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.List;
 
@@ -16,7 +14,6 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
     RecyclerView recyclerView;
     AdminListAdapter adapter;
     List<AdminUser> usersList;
-    Button approveBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,17 +29,6 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
         background.delegate = AdminActivity.this;
         final String method = "admin_user";
         background.execute(method);
-
-        approveBtn = findViewById(R.id.approve);
-        approveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String method1 = "set_approve";
-                BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
-                System.out.print(usersList.get(0).REGD_NO);
-                backgroundTask.execute("set_approve", usersList.get(0).REGD_NO);
-            }
-        });
 
         SwipeHelper swipeHelper = new SwipeHelper(this, recyclerView) {
             @Override
@@ -78,6 +64,10 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                             @Override
                             public void onClick(int pos) {
                                 // TODO: OnUnshare
+                                String method1 = "set_approve";
+                                BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
+                                System.out.print(usersList.get(0).REGD_NO);
+                                backgroundTask.execute("set_approve", usersList.get(pos).REGD_NO);
                             }
                         }
                 ));

@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 String encodeImage = imageToString(imageBitmap);
                 BackgroundTask backgroundTask = new BackgroundTask(getContext());
-                String method = "sendImage";
+                String method = "uploadImage";
                 backgroundTask.execute(method,encodeImage,User.getRegdNo());
             }
         });

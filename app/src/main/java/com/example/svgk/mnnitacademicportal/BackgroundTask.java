@@ -208,7 +208,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
 
-        }else if(method.equals("sendImage")){
+        }else if(method.equals("uploadImage")){
             String encoded_image = params[1];
             String regd_no = params[2];
             try {
