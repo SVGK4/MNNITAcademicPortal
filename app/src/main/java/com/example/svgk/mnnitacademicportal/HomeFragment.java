@@ -59,9 +59,7 @@ public class HomeFragment extends Fragment {
             }
         });
         //photo.setImageResource(R.mipmap.back_arrow);
-        if(imageBitmap != null) {
             photo.setImageBitmap(imageBitmap);
-        }
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

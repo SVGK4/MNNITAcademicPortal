@@ -57,10 +57,9 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                             @Override
                             public void onClick(int pos) {
                                 // TODO: OnTransfer
-                                String method1 = "deny_approval";
+                                String method = "deny_approval";
                                 BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
-                                System.out.print(usersList.get(0).REGD_NO);
-                                backgroundTask.execute("deny_approval", usersList.get(pos).REGD_NO);
+                                backgroundTask.execute(method, usersList.get(pos).REGD_NO);
                                 usersList.remove(pos);
                                 adapter.notifyItemRemoved(pos);
                             }
@@ -76,7 +75,6 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                                 // TODO: OnUnshare
                                 String method1 = "set_approve";
                                 BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
-                                System.out.print(usersList.get(0).REGD_NO);
                                 backgroundTask.execute("set_approve", usersList.get(pos).REGD_NO);
                                 usersList.remove(pos);
                                 adapter.notifyItemRemoved(pos);
