@@ -30,12 +30,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        forgotPassword = findViewById(R.id.forgot);
-        loginButton = findViewById(R.id.sign_in);
-        username = findViewById(R.id.user_name);
-        userpass = findViewById(R.id.user_pass);
-        registerBtn = findViewById(R.id.registerBtn);
+
 
         SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
         user_name = preferences.getString("user_name","");
@@ -46,6 +41,13 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             confirmLogin();
         }
 
+        setContentView(R.layout.activity_login);
+
+        forgotPassword = findViewById(R.id.forgot);
+        loginButton = findViewById(R.id.sign_in);
+        username = findViewById(R.id.user_name);
+        userpass = findViewById(R.id.user_pass);
+        registerBtn = findViewById(R.id.registerBtn);
 
         //When Forgot Password is clicked
         forgotPassword.setOnClickListener(new View.OnClickListener() {

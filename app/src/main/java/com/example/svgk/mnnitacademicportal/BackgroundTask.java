@@ -25,6 +25,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     public BackroundResponse delegate = null;
     private String method;
 
+
     public interface BackroundResponse {
         void processFinished(String result);
     }
@@ -51,12 +52,13 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        String reg_url = "http://10.0.2.2/mnnit_database/register.php";
-        String log_url = "http://10.0.2.2/mnnit_database/user.php";
-        String admin_url = "http://10.0.2.2/mnnit_database/admin_user.php";
-        String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
-        String feedback_url = "http://10.0.2.2/mnnit_database/feedback.php";
-        String image_url = "http://10.0.2.2/mnnit_database/image_connection.php";
+        String reg_url = "https://server-manasabhilash.c9users.io/register.php";
+        String log_url = "https://server-manasabhilash.c9users.io/user.php";
+        String admin_url = "https://server-manasabhilash.c9users.io/admin_user.php";
+        String approve_url = "https://server-manasabhilash.c9users.io/set_approve.php";
+        String feedback_url = "https://server-manasabhilash.c9users.io/feedback.php";
+        String image_url = "https://server-manasabhilash.c9users.io/image_connection.php";
+        String denyApproval = "https://server-manasabhilash.c9users.io/denyApproval.php";
 
         method = params[0];
 
