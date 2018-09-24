@@ -17,11 +17,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BackgroundTask.BackroundResponse {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    private TextView name,regd_no,branch;
+    private TextView name, regd_no, branch;
     private ImageView photo;
 
     @Override
@@ -47,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         photo.setImageBitmap(HomeFragment.imageBitmap);
 
-
+        BackgroundTask backgroundTask = new BackgroundTask(this);
+        backgroundTask.delegate = MainActivity.this;
+        String method = "recieve_image";
+        backgroundTask.execute(method, User.getRegdNo());
 
         //Drawer Layout
         mDrawerLayout = findViewById(R.id.drawer);
@@ -59,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_container,new HomeFragment()).commit();
+                                .replace(R.id.fragment_container, new HomeFragment()).commit();
                         break;
                     case R.id.go:
                         break;
@@ -75,13 +78,13 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(loginIntent);
                         SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("user_name",null);
-                        editor.putString("user_pass",null);
+                        editor.putString("user_name", null);
+                        editor.putString("user_pass", null);
                         editor.apply();
                         finish();
                         break;
                     case R.id.admin:
-                        Intent intent = new Intent(MainActivity.this,AdminActivity.class);
+                        Intent intent = new Intent(MainActivity.this, AdminActivity.class);
                         startActivity(intent);
                         break;
                 }
@@ -89,12 +92,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container,new HomeFragment()).commit();
+                    .replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.home);
         }
-
 
 
     }
@@ -104,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
         if (mToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.search:
-                Intent intent = new Intent(MainActivity.this,EmailActivity.class);
+                Intent intent = new Intent(MainActivity.this, EmailActivity.class);
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.options_main_activity,menu);
+        getMenuInflater().inflate(R.menu.options_main_activity, menu);
         return true;
     }
 
@@ -122,10 +124,14 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 
 
+    @Override
+    public void processFinished(String result) {
+//        byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
+//        HomeFragment.imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//        photo.setImageBitmap(HomeFragment.imageBitmap);
+    }
 }

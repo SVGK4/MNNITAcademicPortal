@@ -57,7 +57,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
         String feedback_url = "http://10.0.2.2/mnnit_database/feedback.php";
         String image_url = "http://10.0.2.2/mnnit_database/image_connection.php";
-        String deny_url = "http://10.0.2.2/mnnit_database/deny_approve.php";
+        String image_receive_utl = "http://10.0.2.2/mnnit_database/recieve_image.php";
+        String deny_url = "http://10.0.2.2/mnnit_database/deny_approval.php";
 
         method = params[0];
 
@@ -209,7 +210,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
 
-        }else if(method.equals("uploadImage")){
+        } else if (method.equals("uploadImage")) {
             String encoded_image = params[1];
             String regd_no = params[2];
             try {
@@ -233,9 +234,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else if(method.equals("deny_approval")) {
+        } else if (method.equals("deny_approval")) {
             String regd_no = params[1];
-            try{
+            try {
                 URL url = new URL(deny_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -243,16 +244,38 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream os = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                String data = URLEncoder.encode("regd_no","UTF-8") + "=" + URLEncoder.encode(regd_no, "UTF-8");
+                String data = URLEncoder.encode("regd_no", "UTF-8") + "=" + URLEncoder.encode(regd_no, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 os.close();
-                InputStream is = httpURLConnection.getInputStream();
-                return  getResponse(is);
-            }catch (MalformedURLException e) {
+                InputStream Is = httpURLConnection.getInputStream();
+                return getResponse(Is);
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }catch (IOException e) {
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (method.equals("recieve_image")) {
+            String regd_no = params[1];
+            try {
+                URL url = new URL(image_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("regd_no", "UTF-8") + "=" + URLEncoder.encode(regd_no, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream Is = httpURLConnection.getInputStream();
+                return getResponse(Is);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -291,6 +314,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
         } else if (method.equals("feedback")) {
             Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
+        } else if (method.equals("recieve_image")){
+            delegate.processFinished(result);
+            Toast.makeText(ctx, "Image String Recieved", Toast.LENGTH_SHORT).show();
         }
     }
 }
