@@ -113,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
                 User user = new User(name, reg_no, user_pass, mail_id, contact, db, branch, semester, gender, address);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
+                Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
                 finish();
             }else{
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
