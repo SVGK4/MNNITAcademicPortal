@@ -1,5 +1,6 @@
 package com.example.svgk.mnnitacademicportal;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     private TextView forgotPassword, registerBtn;
     private Button loginButton;
     private EditText username, userpass;
-
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             public void onClick(View v) {
                 String user_name = username.getText().toString();
                 String user_pass = userpass.getText().toString();
+                progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
                 try {
                     MessageDigest md = null;
                     md = MessageDigest.getInstance("SHA256");
@@ -90,7 +92,6 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     public void processFinished(String userJSON) {
         try {
 
-            Toast.makeText(this, userJSON, Toast.LENGTH_SHORT).show();
             JSONObject baseJsonResponse = new JSONObject(userJSON);
 
             // Extract the JSONArray associated with the key called "server_response",
@@ -119,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             }else{
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
+            progressDialog.dismiss();
 
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the user JSON results", e);
