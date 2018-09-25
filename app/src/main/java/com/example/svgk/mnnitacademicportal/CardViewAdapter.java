@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class AdminListAdapter extends RecyclerView.Adapter<AdminListAdapter.AdminViewHolder> {
+public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.AdminViewHolder> {
 
     private Context mContext;
-    private List<AdminUser> userList ;
+    private List<MultipleUsers> userList ;
 
-    public AdminListAdapter(Context mCtx,List<AdminUser> userList){
+    public CardViewAdapter(Context mCtx, List<MultipleUsers> userList){
         this.mContext = mCtx;
         this.userList = userList;
     }
@@ -30,7 +30,7 @@ public class AdminListAdapter extends RecyclerView.Adapter<AdminListAdapter.Admi
 
     @Override
     public void onBindViewHolder(@NonNull AdminViewHolder holder, int position) {
-        AdminUser user = userList.get(position);
+        MultipleUsers user = userList.get(position);
 
         holder.name.setText("Name : "+user.getNAME());
         holder.regd_no.setText("Regd.No : " + user.getREGD_NO());

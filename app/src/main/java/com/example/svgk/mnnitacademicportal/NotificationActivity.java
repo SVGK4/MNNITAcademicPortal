@@ -5,15 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class NotificationActivity extends AppCompatActivity {
 
@@ -44,8 +40,10 @@ public class NotificationActivity extends AppCompatActivity {
         if(requestCode == 2 && resultCode == RESULT_OK){
             Uri uri = data.getData();
             File file = null;
+            //String path = getPath
             if (uri != null) {
                 file = new File(uri.toString());
+
             }
             String stringEncoded = encodeFileToBase64Binary(file);
             Toast.makeText(this, stringEncoded, Toast.LENGTH_SHORT).show();
@@ -56,18 +54,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     private String encodeFileToBase64Binary(File file){
         String encodedfile = null;
-        try {
-            FileInputStream fileInputStreamReader = new FileInputStream(file);
-            byte[] bytes = new byte[(int)file.length()];
-            fileInputStreamReader.read(bytes);
-            encodedfile = Base64.encodeToString(bytes,Base64.DEFAULT);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
 
         return encodedfile;
     }
