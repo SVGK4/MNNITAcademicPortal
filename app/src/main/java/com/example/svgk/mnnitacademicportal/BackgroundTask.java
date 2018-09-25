@@ -51,14 +51,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        String reg_url = "http://10.0.2.2/mnnit_database/register.php";
-        String log_url = "http://10.0.2.2/mnnit_database/user.php";
-        String admin_url = "http://10.0.2.2/mnnit_database/admin_user.php";
-        String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
-        String feedback_url = "http://10.0.2.2/mnnit_database/feedback.php";
-        String image_url = "http://10.0.2.2/mnnit_database/image_connection.php";
-        String image_receive_utl = "http://10.0.2.2/mnnit_database/recieve_image.php";
-        String deny_url = "http://10.0.2.2/mnnit_database/deny_approval.php";
+
 
         method = params[0];
 
@@ -282,6 +275,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
 
         return null;
     }
+
 
     private String getResponse(InputStream Is) {
         String response = "";
