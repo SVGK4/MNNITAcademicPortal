@@ -145,7 +145,6 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
 
         } catch (JSONException e) {
             progressDialog.dismiss();
-            Log.e("QueryUtils", "Problem parsing the user JSON results", e);
             Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
         }
     }
