@@ -18,8 +18,6 @@
             android:title="Gopi"
             android:icon="@mipmap/lock"/>
 
-
-
     </group>
 
     <item android:title="communicate">
@@ -43,6 +41,10 @@
             <item android:id="@+id/admin"
                 android:title="admin"
                 android:icon="@mipmap/user"/>
+
+            <item android:id="@+id/notification"
+                android:title="Notification"
+                android:icon="@mipmap/feedbck"/>
 
         </menu>
     </item>

@@ -84,8 +84,12 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                         finish();
                         break;
                     case R.id.admin:
-                        Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-                        startActivity(intent);
+                        Intent adminIntent = new Intent(MainActivity.this, AdminActivity.class);
+                        startActivity(adminIntent);
+                        break;
+                    case R.id.notification:
+                        Intent notificationIntent = new Intent(MainActivity.this,NotificationActivity.class);
+                        startActivity(notificationIntent);
                         break;
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);

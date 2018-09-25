@@ -43,6 +43,7 @@
         <activity
             android:name=".EmailActivity"
             android:label="@string/em"/>
+        <activity android:name=".NotificationActivity" />
     </application>
 
 </manifest>
