@@ -346,7 +346,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
         } else if (method.equals("feedback")) {
             Toast.makeText(ctx, result, Toast.LENGTH_SHORT).show();
-        } else if (method.equals("recieve_image")) {
+        } else if (method.equals("recieve_image")){
             delegate.processFinished(result);
             Toast.makeText(ctx, "Image String Recieved", Toast.LENGTH_SHORT).show();
         } else if (method.equals("search_student")) {
