@@ -1,5 +1,6 @@
 package com.example.svgk.mnnitacademicportal;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,19 +25,25 @@ import java.util.List;
 
 public class EmailActivity extends AppCompatActivity implements BackgroundTask.BackroundResponse {
 
+    public static Context EMAIL_ACTIVITY_CONTEXT ;
     EditText emailSubject, emailMessge;
     EditText regd_no;
     List<MultipleUsers> usersList;
     CardViewAdapter adapter;
     RecyclerView recyclerView;
+    SendMail sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
 
+        EMAIL_ACTIVITY_CONTEXT = this;
         emailSubject = findViewById(R.id.subject);
         emailMessge = findViewById(R.id.message);
+        emailSubject.setVisibility(View.INVISIBLE);
+        emailMessge.setVisibility(View.INVISIBLE);
+
         recyclerView = findViewById(R.id.recycler_view_email);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -93,12 +100,11 @@ public class EmailActivity extends AppCompatActivity implements BackgroundTask.B
     }
 
     private void sendEmail() {
-        String email = "";
+        String email = "surapanenigopi44@gmail.com";
         String subject = emailSubject.getText().toString().trim();
         String message = emailMessge.getText().toString().trim();
-        SendMail sm = new SendMail(this, email, subject, message);
+        sm = new SendMail(this, email, subject, message);
         sm.execute();
-
     }
 
     @Override

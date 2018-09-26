@@ -20,6 +20,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.AdminV
         this.userList = userList;
     }
 
+
     @NonNull
     @Override
     public AdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,6 +37,21 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.AdminV
         holder.regd_no.setText("Regd.No : " + user.getREGD_NO());
         holder.mail_id.setText("Email : " + user.getEMAIL());
         holder.branch.setText("Branch : " + user.getBRANCH());
+
+
+        if(mContext == EmailActivity.EMAIL_ACTIVITY_CONTEXT){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EmailActivity emailActivity = (EmailActivity)mContext;
+                    emailActivity.recyclerView.setAdapter(null);
+                    emailActivity.emailMessge.setVisibility(View.VISIBLE);
+                    emailActivity.emailSubject.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+
+
     }
 
     @Override

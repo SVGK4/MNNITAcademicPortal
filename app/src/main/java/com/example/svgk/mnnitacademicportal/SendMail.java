@@ -2,6 +2,7 @@ package com.example.svgk.mnnitacademicportal;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
     private String subject;
     private String message;
 
-    private ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
 
     public SendMail(Context context, String email, String subject, String message){
         this.context = context;
@@ -37,8 +38,21 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = ProgressDialog.show(context,"Sending message","Please wait...",false,false);
-    }
+        progressDialog = ProgressDialog.show(
+                context,
+                "Sending message",
+                "Message",
+                true,
+                true,
+                new DialogInterface.OnCancelListener(){
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        EmailActivity emailActivity = (EmailActivity)context;
+                        progressDialog.dismiss();
+                        emailActivity.sm.cancel(true);
+                    }
+                }
+        );    }
 
     @Override
     protected void onPostExecute(Void aVoid) {
@@ -79,4 +93,6 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
         }
         return null;
     }
+
+
 }
