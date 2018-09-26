@@ -15,8 +15,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@drawable/round_image"
-        android:src="@mipmap/user"
-        android:backgroundTint="#ffffff"/>
+        android:src="@mipmap/user" />
 
     <TextView
         android:id="@+id/student_name_navigation"

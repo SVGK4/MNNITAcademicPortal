@@ -23,7 +23,7 @@ public class FeedbackActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        feedback = findViewById(R.id.name);
+        feedback = findViewById(R.id.feedback);
         submitFeedback = findViewById(R.id.submit_feedback);
         submitFeedback.setOnClickListener(new View.OnClickListener() {
             @Override

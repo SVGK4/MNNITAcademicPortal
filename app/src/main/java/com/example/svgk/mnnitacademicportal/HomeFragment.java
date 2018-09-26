@@ -2,16 +2,13 @@ package com.example.svgk.mnnitacademicportal;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,17 +17,12 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
     private LineChart mChart;
-    private TextView name, regd_no, email, contact;
+    private TextView name, regd_no, email, contact, viewProfile;
     private ImageView photo;
-    private Button upload;
     static Bitmap imageBitmap = null;
 
     @Nullable
@@ -46,28 +38,14 @@ public class HomeFragment extends Fragment {
         email = rootView.findViewById(R.id.student_email);
         contact = rootView.findViewById(R.id.student_phone_number);
         photo = rootView.findViewById(R.id.student_photo);
-        upload = rootView.findViewById(R.id.button);
 
-        photo.setOnClickListener(new View.OnClickListener() {
+        viewProfile = rootView.findViewById(R.id.view_full_profile);
+
+        viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(intent, 1);
-            }
-        });
-        //photo.setImageResource(R.mipmap.back_arrow);
-            photo.setImageBitmap(imageBitmap);
-
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String encodeImage = imageToString(imageBitmap);
-                BackgroundTask backgroundTask = new BackgroundTask(getContext());
-                String method = "uploadImage";
-                backgroundTask.execute(method, encodeImage, User.getRegdNo());
+                Intent intent = new Intent(getContext(),UserProfile.class);
+                startActivity(intent);
             }
         });
 
@@ -102,30 +80,5 @@ public class HomeFragment extends Fragment {
         LineData lineData = new LineData(set1, set2);
         mChart.setData(lineData);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-            try {
-                imageBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            photo.setImageBitmap(imageBitmap);
-
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private String imageToString(Bitmap bitmap) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-        byte[] imageBytes = outputStream.toByteArray();
-        String encodeImage = android.util.Base64.encodeToString(imageBytes, android.util.Base64.DEFAULT);
-        return encodeImage;
-    }
-
 
 }

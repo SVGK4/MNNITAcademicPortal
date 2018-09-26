@@ -31,16 +31,6 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
-        user_name = preferences.getString("user_name","");
-        user_pass = preferences.getString("user_pass","");
-
-        if(!user_name.equals("") && !user_name.equals("")){
-            progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
-            confirmLogin();
-        }
-
         setContentView(R.layout.activity_login);
 
         forgotPassword = findViewById(R.id.forgot);
@@ -48,6 +38,14 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         username = findViewById(R.id.user_name);
         userpass = findViewById(R.id.user_pass);
         registerBtn = findViewById(R.id.registerBtn);
+
+        SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
+        user_name = preferences.getString("user_name","");
+        user_pass = preferences.getString("user_pass","");
+
+        if(!user_name.equals("") && !user_pass.equals("")){
+            confirmLogin();
+        }
 
         //When Forgot Password is clicked
         forgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +62,6 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             public void onClick(View v) {
                 user_name = username.getText().toString();
                 user_pass = userpass.getText().toString();
-                progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
                 try {
                     MessageDigest md = null;
                     md = MessageDigest.getInstance("SHA256");
@@ -99,7 +96,8 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
         });
     }
 
-    private void confirmLogin(){
+    protected void confirmLogin(){
+        progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
         String method = "login";
         BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
         backgroundTask.delegate = LoginActivity.this;

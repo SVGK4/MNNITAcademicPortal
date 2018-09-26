@@ -60,6 +60,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         String image_receive_utl = "http://10.0.2.2/mnnit_database/recieve_image.php";
         String deny_url = "http://10.0.2.2/mnnit_database/deny_approval.php";
         String search_student_url = "http://10.0.2.2/mnnit_database/search_student.php";
+        String update_user_url = "http://10.0.2.2/mnnit_database/update_user.php";
 
         method = params[0];
 
@@ -305,6 +306,32 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return builder.toString().trim();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if(method.equals("update_user")){
+            String regd_no = params[1];
+            String email = params[2];
+            String address = params[3];
+            try {
+                URL url = new URL(update_user_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("regd_no", "UTF-8") + "=" + URLEncoder.encode(regd_no, "UTF-8") + "&" +
+                        URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&" +
+                        URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream Is = httpURLConnection.getInputStream();
+                return getResponse(Is);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

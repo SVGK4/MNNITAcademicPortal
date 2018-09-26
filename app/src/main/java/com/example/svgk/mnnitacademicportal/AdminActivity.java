@@ -79,7 +79,6 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                                // TODO: OnUnshare
                                 String method1 = "set_approve";
                                 BackgroundTask backgroundTask = new BackgroundTask(AdminActivity.this);
                                 backgroundTask.execute("set_approve", usersList.get(pos).REGD_NO);

@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
             navigationView.setCheckedItem(R.id.home);
         }
 
-
     }
 
     @Override
@@ -131,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
         }
     }
 
-
     @Override
     public void processFinished(String result) {
         try {
@@ -145,4 +143,5 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
         }
 
     }
+
 }
