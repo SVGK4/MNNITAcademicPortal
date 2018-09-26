@@ -1,6 +1,6 @@
 package com.example.svgk.mnnitacademicportal;
 
-public class AdminUser {
+public class MultipleUsers {
 
     public  String NAME;
     public  String REGD_NO;
@@ -13,7 +13,7 @@ public class AdminUser {
     public  String GENDER;
     public  String ADDRESS;
 
-    public AdminUser(String... params){
+    public MultipleUsers(String... params){
         this.REGD_NO = params[0];
         this.NAME = params[1];
         this.BRANCH = params[2];

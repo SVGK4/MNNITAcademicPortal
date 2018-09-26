@@ -76,5 +76,7 @@
     <string name="destination_email">Destination Email</string>
     <string name="compose">Compose</string>
     <string name="click_me">CLick Me</string>
+    <string name="email">Email</string>
+    <string name="send_mail">send</string>
 
 </resources>

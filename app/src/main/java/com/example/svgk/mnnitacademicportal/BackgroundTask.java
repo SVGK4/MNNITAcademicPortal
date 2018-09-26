@@ -51,16 +51,15 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-
-        String reg_url = "https://server-manasabhilash.c9users.io/register.php";
-        String log_url = "https://server-manasabhilash.c9users.io/user.php";
-        String admin_url = "https://server-manasabhilash.c9users.io/admin_user.php";
-        String approve_url = "https://server-manasabhilash.c9users.io/set_approve.php";
-        String feedback_url = "https://server-manasabhilash.c9users.io/feedback.php";
-        String image_url = "https://server-manasabhilash.c9users.io/image_connection.php";
-        String deny_url = "https://server-manasabhilash.c9users.io/deny_approval.php";
-        String image_receive_utl = "https://server-manasabhilash.c9users.io/recieve_image.php";
-
+        String reg_url = "http://10.0.2.2/mnnit_database/register.php";
+        String log_url = "http://10.0.2.2/mnnit_database/user.php";
+        String admin_url = "http://10.0.2.2/mnnit_database/admin_user.php";
+        String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
+        String feedback_url = "http://10.0.2.2/mnnit_database/feedback.php";
+        String image_url = "http://10.0.2.2/mnnit_database/image_connection.php";
+        String image_receive_utl = "http://10.0.2.2/mnnit_database/recieve_image.php";
+        String deny_url = "http://10.0.2.2/mnnit_database/deny_approval.php";
+        String search_student_url = "http://10.0.2.2/mnnit_database/search_student.php";
 
         method = params[0];
 
@@ -280,6 +279,37 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else if (method.equals("search_student")) {
+            String regd_no = params[1];
+            String JSON_String = null;
+            try {
+                URL url = new URL(search_student_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("regd_no", "UTF-8") + "=" + URLEncoder.encode(regd_no, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder builder = new StringBuilder();
+                while ((JSON_String = bufferedReader.readLine()) != null) {
+                    builder.append(JSON_String + "\n");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return builder.toString().trim();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
@@ -320,6 +350,9 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         } else if (method.equals("recieve_image")){
             delegate.processFinished(result);
             Toast.makeText(ctx, "Image String Recieved", Toast.LENGTH_SHORT).show();
+        } else if (method.equals("search_student")) {
+            delegate.processFinished(result);
+            Toast.makeText(ctx, "done", Toast.LENGTH_SHORT).show();
         }
     }
 }

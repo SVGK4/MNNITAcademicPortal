@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
             return true;
         }
         switch (item.getItemId()) {
-            case R.id.search:
+            case R.id.email:
                 Intent intent = new Intent(MainActivity.this, EmailActivity.class);
                 startActivity(intent);
         }

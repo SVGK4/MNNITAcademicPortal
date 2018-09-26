@@ -20,8 +20,8 @@ import java.util.List;
 public class AdminActivity extends AppCompatActivity implements BackgroundTask.BackroundResponse {
 
     RecyclerView recyclerView;
-    AdminListAdapter adapter;
-    List<AdminUser> usersList;
+    CardViewAdapter adapter;
+    List<MultipleUsers> usersList;
     private ProgressDialog progressDialog;
 
     @Override
@@ -96,18 +96,18 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
     public void processFinished(String result) {
         progressDialog.dismiss();
         usersList = extractFeatureFromJson(result);
-        adapter = new AdminListAdapter(this, usersList);
+        adapter = new CardViewAdapter(this, usersList);
         recyclerView.setAdapter(adapter);
     }
 
-    private List<AdminUser> extractFeatureFromJson(String userJSON){
+    private List<MultipleUsers> extractFeatureFromJson(String userJSON){
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(userJSON)) {
             return null;
         }
 
         // Create an empty ArrayList that we can start adding users to
-        List<AdminUser> users = new ArrayList<>();
+        List<MultipleUsers> users = new ArrayList<>();
 
         try {
 
@@ -118,7 +118,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
             // which represents a list of features (or users).
             JSONArray userArray = baseJsonResponse.getJSONArray("server_response");
 
-            // For each user in the userArray, create an {@link AdminUser} object
+            // For each user in the userArray, create an {@link MultipleUsers} object
             for (int i = 0; i < userArray.length(); i++) {
 
                 // Get a single user at position i within the list of users
@@ -128,11 +128,11 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 String name = currentUser.getString("name");
                 String branch = currentUser.getString("branch");
                 String mail_id = currentUser.getString("email");
-                // Create a new {@link AdminUser} object with the magnitude, location, time,
+                // Create a new {@link MultipleUsers} object with the magnitude, location, time,
                 // and url from the JSON response.
-                AdminUser user = new AdminUser(reg_no,name,branch,mail_id);
+                MultipleUsers user = new MultipleUsers(reg_no,name,branch,mail_id);
 
-                // Add the new {@link AdminUser} to the list of users.
+                // Add the new {@link MultipleUsers} to the list of users.
                 users.add(user);
             }
 
