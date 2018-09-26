@@ -51,15 +51,17 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        String reg_url = "http://10.0.2.2/mnnit_database/register.php";
-        String log_url = "http://10.0.2.2/mnnit_database/user.php";
-        String admin_url = "http://10.0.2.2/mnnit_database/admin_user.php";
-        String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
-        String feedback_url = "http://10.0.2.2/mnnit_database/feedback.php";
-        String image_url = "http://10.0.2.2/mnnit_database/image_connection.php";
-        String image_receive_utl = "http://10.0.2.2/mnnit_database/recieve_image.php";
-        String deny_url = "http://10.0.2.2/mnnit_database/deny_approval.php";
-        String search_student_url = "http://10.0.2.2/mnnit_database/search_student.php";
+
+        String reg_url = "https://server-manasabhilash.c9users.io/register.php";
+        String log_url = "https://server-manasabhilash.c9users.io/user.php";
+        String admin_url = "https://server-manasabhilash.c9users.io/admin_user.php";
+        String approve_url = "https://server-manasabhilash.c9users.io/set_approve.php";
+        String feedback_url = "https://server-manasabhilash.c9users.io/feedback.php";
+        String image_url = "https://server-manasabhilash.c9users.io/image_connection.php";
+        String deny_url = "https://server-manasabhilash.c9users.io/deny_approval.php";
+        String image_receive_utl = "https://server-manasabhilash.c9users.io/recieve_image.php";
+        String search_student_url = "https://server-manasabhilash.c9users.io/serach_student.php";
+
 
         method = params[0];
 

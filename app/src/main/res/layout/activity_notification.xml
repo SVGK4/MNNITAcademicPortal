@@ -4,8 +4,16 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/fetch_pdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select FIle"/>
+
+
+    <Button
         android:id="@+id/upload_pdf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="upload"/>
+
 </LinearLayout>
