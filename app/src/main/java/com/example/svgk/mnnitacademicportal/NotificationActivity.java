@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,35 +44,37 @@ public class NotificationActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 2 && resultCode == RESULT_OK){
-            Uri uri = data.getData();
-            File file = null;
-            if (uri != null) {
-                file = new File(uri.toString());
+        try {
+            if (requestCode == 2 && resultCode == RESULT_OK) {
+                Uri uri = data.getData();
+                File file = null;
+                if (uri != null) {
+                    file = new File(uri.toString());
+                }
+                String stringEncoded = encodeFileToBase64Binary(file);
+                Toast.makeText(this, stringEncoded, Toast.LENGTH_SHORT).show();
             }
-            String stringEncoded = encodeFileToBase64Binary(file);
-            Toast.makeText(this, stringEncoded, Toast.LENGTH_SHORT).show();
-        }
 
-        super.onActivityResult(requestCode, resultCode, data);
+            super.onActivityResult(requestCode, resultCode, data);
+        }catch (Exception e) {
+            e.printStackTrace();
+
+         }
     }
 
     private String encodeFileToBase64Binary(File file){
-        String encodedfile = null;
+        byte[] data = null;
         try {
-            FileInputStream fileInputStreamReader = new FileInputStream(file);
-            byte[] bytes = new byte[(int)file.length()];
-            fileInputStreamReader.read(bytes);
-            encodedfile = Base64.encodeToString(bytes,Base64.DEFAULT);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+
+            data = FileUtils.readFileToByteArray(file);
+
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
+
         }
 
-        return encodedfile;
+        return Base64.encodeToString(data, Base64.DEFAULT);
     }
 
 

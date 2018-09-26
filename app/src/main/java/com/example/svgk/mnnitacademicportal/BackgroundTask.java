@@ -52,6 +52,15 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
 
+        String reg_url = "https://server-manasabhilash.c9users.io/register.php";
+        String log_url = "https://server-manasabhilash.c9users.io/user.php";
+        String admin_url = "https://server-manasabhilash.c9users.io/admin_user.php";
+        String approve_url = "https://server-manasabhilash.c9users.io/set_approve.php";
+        String feedback_url = "https://server-manasabhilash.c9users.io/feedback.php";
+        String image_url = "https://server-manasabhilash.c9users.io/image_connection.php";
+        String deny_url = "https://server-manasabhilash.c9users.io/deny_approval.php";
+        String image_receive_utl = "https://server-manasabhilash.c9users.io/recieve_image.php";
+
 
         method = params[0];
 
