@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "329388018814",
+    "firebase_url": "https://mnnit-academic-portal.firebaseio.com",
+    "project_id": "mnnit-academic-portal",
+    "storage_bucket": "mnnit-academic-portal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329388018814:android:83e9cc67f12dff35",
+        "android_client_info": {
+          "package_name": "com.example.svgk.mnnitacademicportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329388018814-omjjv8kqjpv1rg1er71r3ov2lbtd8r1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.svgk.mnnitacademicportal",
+            "certificate_hash": "56ec6054f92afc5033a169e79af0f0fade225d5b"
+          }
+        },
+        {
+          "client_id": "329388018814-m3r8fsd8lupj655227s8um97h0890f8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNFF0g6n3qPefCYxggcoaM9Dqj4CPUV_I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329388018814-m3r8fsd8lupj655227s8um97h0890f8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329388018814:android:7e9a9de83dd91ac4",
+        "android_client_info": {
+          "package_name": "com.google"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329388018814-eeq8vd0j75tau980k8h1mt35qlsin7le.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google",
+            "certificate_hash": "56ec6054f92afc5033a169e79af0f0fade225d5b"
+          }
+        },
+        {
+          "client_id": "329388018814-m3r8fsd8lupj655227s8um97h0890f8n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNFF0g6n3qPefCYxggcoaM9Dqj4CPUV_I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329388018814-m3r8fsd8lupj655227s8um97h0890f8n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
