@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@drawable/background">
@@ -85,4 +89,24 @@
 
     </android.support.v7.widget.CardView>
 
+    <TextView
+        android:id="@+id/notif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/card_view"
+        android:text="Notifications Available"
+        android:textSize="25sp"/>
+
+    <ListView
+        android:minHeight="100dp"
+        android:layout_width="match_parent"
+        android:id="@+id/listView"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bacl"
+        android:layout_below="@id/notif"
+        android:layout_height="wrap_content">
+    </ListView>
+
 </RelativeLayout>
+</ScrollView>
