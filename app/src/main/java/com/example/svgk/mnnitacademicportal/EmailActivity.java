@@ -110,7 +110,7 @@ public class EmailActivity extends AppCompatActivity implements BackgroundTask.B
     @Override
     public void processFinished(String result) {
         usersList = extractFeatureFromJson(result);
-        adapter = new CardViewAdapter(this, usersList);
+        adapter = new CardViewAdapter(this, usersList,null);
         recyclerView.setAdapter(adapter);
     }
 

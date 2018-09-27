@@ -98,7 +98,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
     public void processFinished(String result) {
         progressDialog.dismiss();
         usersList = extractFeatureFromJson(result);
-        adapter = new CardViewAdapter(this, usersList);
+        adapter = new CardViewAdapter(this, usersList,null);
         recyclerView.setAdapter(adapter);
     }
 

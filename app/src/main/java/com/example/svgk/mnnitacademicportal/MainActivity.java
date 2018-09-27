@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                     case R.id.fee:
                         getPdf(fee_structure_url);
                         break;
+                    case R.id.dwnlds:
+                        Intent intent = new Intent(MainActivity.this,DownloadActivity.class);
+                        startActivity(intent);
+                        break;
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;

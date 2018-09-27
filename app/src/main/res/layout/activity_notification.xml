@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/file"
             android:hint="Name of pdf"
-            android:inputType="number"
+            android:inputType="text"
             android:maxLength="8"
             android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
