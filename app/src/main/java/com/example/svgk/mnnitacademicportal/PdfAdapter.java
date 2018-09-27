@@ -17,7 +17,6 @@ public class PdfAdapter extends ArrayAdapter<Pdf>
     private int layoutResourceId;
     ArrayList<Pdf> data;
     private Pdf pdf;
-    private static int count = -1;
     public PdfAdapter(Activity activity, int layoutResourceId, ArrayList<Pdf> data) {
         super(activity, layoutResourceId, data);
 
@@ -57,8 +56,8 @@ public class PdfAdapter extends ArrayAdapter<Pdf>
         }
 
         pdf = data.get(position);
-        holder.textViewName.setText((count++)+" "+pdf.getName());
-        //holder.textViewUrl.setText(pdf.getUrl());
+        holder.textViewName.setText(pdf.getName());
+        holder.textViewUrl.setText(pdf.getUrl());
 
         return row;
     }
