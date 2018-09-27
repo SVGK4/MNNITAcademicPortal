@@ -1,14 +1,20 @@
 package com.example.svgk.mnnitacademicportal;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
@@ -18,9 +24,10 @@ import java.util.UUID;
 
 public class NotificationActivity extends AppCompatActivity {
 
-    private Uri filePath;
+    private Uri filePath = null;
     ProgressDialog progressDialog;
     Button fetchPath, upload;
+    EditText nameOfPdf;
     public static final String UPLOAD_URL = "https://server-manasabhilash.c9users.io/upload.php";
     public static final String PDF_FETCH_URL = "https://server-manasabhilash.c9users.io/getPdfs.php";
 
@@ -31,6 +38,14 @@ public class NotificationActivity extends AppCompatActivity {
 
         fetchPath = findViewById(R.id.fetch_pdf);
         upload = findViewById(R.id.upload_pdf);
+        nameOfPdf = findViewById(R.id.name_pdf);
+
+        requestStoragePermission();
+
+        upload.setEnabled(true);
+        if(filePath == null){
+            upload.setEnabled(false);
+        }
 
         //initializing progressDialog
         progressDialog = new ProgressDialog(this);
@@ -43,7 +58,7 @@ public class NotificationActivity extends AppCompatActivity {
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(
                         Intent.createChooser(intent, "Select pdf file"),
-                        2);
+                        1);
             }
         });
 
@@ -60,14 +75,19 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 2 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
+            upload.setEnabled(true);
         }
     }
 
     public void uploadMultipart() {
         //getting name for the pdf
         String name = getFileName(filePath);
+
+        if(!nameOfPdf.getText().toString().equals("")){
+            name = nameOfPdf.getText().toString();
+        }
 
         //getting the actual path of the pdf
         String path = FilePath.getPath(this, filePath);
@@ -94,7 +114,6 @@ public class NotificationActivity extends AppCompatActivity {
         }
     }
 
-
     public String getFileName(Uri uri) {
         String result = null;
         if (uri.getScheme().equals("content")) {
@@ -117,5 +136,29 @@ public class NotificationActivity extends AppCompatActivity {
         return result.substring(0,(result.length()-4));
     }
 
+    //Requesting permission
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+            return;
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            upload.setEnabled(false);
+        }
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == 2) {
+
+            //If permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
 }
