@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_container, new HomeFragment()).commit();
                         break;
-                    case R.id.go:
-                        break;
                     case R.id.fd:
                         Intent forgotIntent = new Intent(MainActivity.this, FeedbackActivity.class);
                         startActivity(forgotIntent);
