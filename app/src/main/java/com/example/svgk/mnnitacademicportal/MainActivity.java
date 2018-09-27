@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
     private ActionBarDrawerToggle mToggle;
     private TextView name, regd_no, branch;
     private ImageView photo;
+    private String acad_cal_url = "https://server-manasabhilash.c9users.io/misc/academic_calendar.pdf";
+    private String fee_structure_url = "https://server-manasabhilash.c9users.io/misc/fee_structure.pdf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,12 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                         HomeFragment.imageBitmap = null;
                         finish();
                         break;
+                    case R.id.acad:
+                        getPdf(acad_cal_url);
+                        break;
+                    case R.id.fee:
+                        getPdf(fee_structure_url);
+                        break;
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -113,6 +122,14 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getPdf(String pdfUrl){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse(pdfUrl));
+        startActivity(intent);
     }
 
     @Override

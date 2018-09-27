@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="298dp"
+        android:layout_height="67dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:theme="@style/editText">
+
+        <EditText
+            android:id="@+id/name_pdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/file"
+            android:hint="Name of pdf"
+            android:inputType="number"
+            android:maxLength="8"
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/fetch_pdf"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select FIle"/>
-
+        android:layout_height="36dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rectangle_corners"
+        android:padding="8dp"
+        android:text="Select FIle" />
 
     <Button
         android:id="@+id/upload_pdf"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="upload"/>
-
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle_corners"
+        android:text="upload" />
 </LinearLayout>

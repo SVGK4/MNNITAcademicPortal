@@ -7,7 +7,6 @@
         android:icon="@mipmap/search"
         app:showAsAction="never" />
 
-
     <item android:id="@+id/newPass"
         android:title="Change Password"
         android:icon="@mipmap/search"
