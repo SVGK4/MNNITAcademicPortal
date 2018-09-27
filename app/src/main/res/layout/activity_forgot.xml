@@ -57,6 +57,7 @@
         android:theme="@style/editText">
 
         <EditText
+            android:id="@+id/regd_no_forgot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/user"
@@ -75,6 +76,33 @@
         android:background="@drawable/rectangle_corners"
         android:elevation="6dp"
         android:foregroundTint="#b69d9e"
-        android:text="@string/reset" />
+        android:text="get code" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:text="Got a code?" />
+
+        <TextView
+            android:id="@+id/reset_with_code"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#0aa0f7"
+            android:gravity="start"
+            android:text="Click here to register" />
+
+    </LinearLayout>
 
 </RelativeLayout>

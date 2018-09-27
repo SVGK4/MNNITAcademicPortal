@@ -47,11 +47,12 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
 
         photo.setImageBitmap(HomeFragment.imageBitmap);
 
-        BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.delegate = this;
-        String method = "recieve_image";
-        backgroundTask.execute(method, User.getRegdNo());
-
+        if (HomeFragment.imageBitmap == null) {
+            BackgroundTask backgroundTask = new BackgroundTask(this);
+            backgroundTask.delegate = this;
+            String method = "recieve_image";
+            backgroundTask.execute(method, User.getRegdNo());
+        }
         //Drawer Layout
         mDrawerLayout = findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, toolbar, R.string.open, R.string.close);
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_container, new HomeFragment()).commit();
                         break;
+                    case R.id.go:
+                        break;
                     case R.id.fd:
                         Intent forgotIntent = new Intent(MainActivity.this, FeedbackActivity.class);
                         startActivity(forgotIntent);
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                         editor.putString("user_name", null);
                         editor.putString("user_pass", null);
                         editor.apply();
+                        HomeFragment.imageBitmap = null;
                         finish();
                         break;
                 }
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                 return true;
             }
         });
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment()).commit();

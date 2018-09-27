@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="26dp">
+
+        <ImageView
+            android:layout_width="97dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/mnnit"
+            android:src="@drawable/mnnit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:id="@+id/mnnit"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:gravity="center|bottom"
+                android:text="@string/mnnit"
+                android:textColor="#859fc9"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:gravity="center|top"
+                android:text="@string/allahabad"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/header"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/code"
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:hint="Your code"
+            android:theme="@style/editText">
+
+            <EditText
+                android:id="@+id/code_reset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/code"
+                android:inputType="number"
+                android:maxLength="8" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:hint="Password"
+            android:layout_gravity="center"
+            android:theme="@style/editText">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/lock"
+                android:inputType="textPassword"
+                android:maxLength="8" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="298dp"
+            android:layout_height="67dp"
+            android:hint="Confirm password"
+            android:layout_gravity="center"
+            android:theme="@style/editText">
+
+            <EditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/lock"
+                android:inputType="textPassword"
+                android:maxLength="8"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rectangle_corners"
+            android:elevation="6dp"
+            android:foregroundTint="#b58f94"
+            android:text="@string/reset" />
+
+    </LinearLayout>
+
+</RelativeLayout>

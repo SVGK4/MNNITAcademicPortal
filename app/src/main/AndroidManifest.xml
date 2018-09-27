@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -44,11 +45,29 @@
             android:name=".EmailActivity"
             android:label="Email"
             android:parentActivityName=".MainActivity" />
+
         <activity android:name=".NotificationActivity" />
         <activity
             android:name=".UserProfile"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ChangePassword"></activity>
+        <activity android:name=".ResetActivity" />
+
+        <service
+            android:name=".FirebaseNotification.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".FirebaseNotification.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
+
+
 
 </manifest>

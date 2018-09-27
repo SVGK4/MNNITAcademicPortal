@@ -39,6 +39,8 @@ public class HomeFragment extends Fragment {
         contact = rootView.findViewById(R.id.student_phone_number);
         photo = rootView.findViewById(R.id.student_photo);
 
+        photo.setImageBitmap(imageBitmap);
+
         viewProfile = rootView.findViewById(R.id.view_full_profile);
 
         viewProfile.setOnClickListener(new View.OnClickListener() {
