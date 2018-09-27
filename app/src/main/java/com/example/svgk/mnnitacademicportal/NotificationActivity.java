@@ -78,19 +78,17 @@ public class NotificationActivity extends AppCompatActivity {
         } else {
             //Uploading code
             try {
-                String uploadId =   UUID.randomUUID().toString();
+                String uploadId = UUID.randomUUID().toString();
 
                 //Creating a multi part request
                 new MultipartUploadRequest(this, uploadId, UPLOAD_URL)
                         .addFileToUpload(path, "pdf") //Adding file
-                        .addParameter("name", name)
-                        .addParameter("admin",User.getNAME())
+                        .addParameter("name", name) //Adding text parameter to the request
                         .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
 
             } catch (Exception exc) {
-                exc.printStackTrace();
                 Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }

@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
         forgotPassword = findViewById(R.id.forgot);
@@ -183,6 +182,10 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             }else{
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
+
+            } catch (JSONException e) {
+                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+            }
             Context context = getApplicationContext();
             SharedPreferences preferences = context.getSharedPreferences("login",Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
@@ -190,11 +193,6 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             editor.putString("user_pass",user_pass);
             editor.apply();
             progressDialog.dismiss();
-
-            } catch (JSONException e) {
-                progressDialog.dismiss();
-                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 

@@ -160,6 +160,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 Intent intent1 = new Intent(AdminActivity.this, ChangePassword.class);
                 startActivity(intent1);
                 break;
+
         }
         return super.onOptionsItemSelected(item);
     }
