@@ -8,13 +8,28 @@
             android:id="@+id/home"
             android:icon="@mipmap/home"
             android:title="Home" />
+
+        <item android:id="@+id/result"
+            android:title="Result"
+            android:icon="@mipmap/result"/>
+
+        <item android:id="@+id/transcript"
+            android:title="Transcript"
+            android:icon="@mipmap/trans"/>
+
+        <item android:id="@+id/semRegisterS"
+            android:title="Semester Registration"
+            android:icon="@mipmap/sem_reg"/>
+
+        <item android:id="@+id/fd"
+            android:title="Feedback"
+            android:icon="@mipmap/feedbck"/>
     </group>
 
-    <item android:title="communicate">
+    <item android:title="Important Sections">
         <menu>
-            <item android:id="@+id/fd"
-                android:title="Feedback"
-                android:icon="@mipmap/feedbck"/>
+
+
 
             <item android:id="@+id/dwnlds"
                 android:title="Downloads Section"
@@ -34,6 +49,7 @@
 
         </menu>
     </item>
+
 
 
 
