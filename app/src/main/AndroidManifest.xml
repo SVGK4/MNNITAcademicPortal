@@ -39,8 +39,7 @@
             android:label="@string/course_feedback"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AdminActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".AdminActivity" />
         <activity
             android:name=".EmailActivity"
             android:label="Email"
@@ -51,6 +50,7 @@
             android:name=".UserProfile"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".ResetActivity" />
+        <activity android:name=".ChangePassword"></activity>
 
         <activity android:name=".ChangePassword"></activity>
 
