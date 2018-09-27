@@ -1,44 +1,55 @@
 package com.example.svgk.mnnitacademicportal;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import java.security.MessageDigest;
 
-public class ChangePassword extends AppCompatActivity implements BackgroundTask.BackroundResponse{
+public class ChangePassword extends AppCompatActivity {
 
     String oldP;
     String setP;
     String confirmP;
     static boolean userAuthenticated;
-    ProgressDialog progressDialog;
-    String user;
+    static String user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-        EditText oldPass = findViewById(R.id.oldPass);
+        EditText oldPass = findViewById(R.id.getOld);
         EditText setPass = findViewById(R.id.setPass);
         EditText confirmPass = findViewById(R.id.confirmPass);
-        Button   changePass = findViewById(R.id.button);
+        Button changePass = findViewById(R.id.change_password);
 
         changePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences preferences = getSharedPreferences("login",MODE_PRIVATE);
+                String pawdHash = preferences.getString("user_pass","");
                 oldP = oldPass.getText().toString();
                 setP = setPass.getText().toString();
                 confirmP = confirmPass.getText().toString();
+                String enteredHash = getHash(oldP);
 
-                String oldHash = getHash(oldP);
-                if(setP.equals(oldP) && userAuthenticated) {
-                    String newHash = getHash(confirmP);
-                    confirmAuthentication(oldHash);
+                if(pawdHash.equals(enteredHash) && setP.equals(confirmP)){
+                    String newPawdHash = getHash(confirmP);
+                    String method = "change_password";
+                    BackgroundTask backgroundTask = new BackgroundTask(ChangePassword.this);
+                    backgroundTask.execute(method,User.getRegdNo(),newPawdHash);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    finish();
                 }
             }
         });
@@ -62,7 +73,7 @@ public class ChangePassword extends AppCompatActivity implements BackgroundTask.
 
             }
             user_pass = generatedOutput.toString();
-
+            Log.i("hash", "hash is" + user_pass);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,38 +81,4 @@ public class ChangePassword extends AppCompatActivity implements BackgroundTask.
 
     }
 
-
-    protected void confirmAuthentication(String user_pass){
-        progressDialog = ProgressDialog.show(ChangePassword.this,"Checking credentials","Please wait...",false,false);
-        String method ;
-        if(LoginActivity.isAdmin) {
-            user = LoginActivity.getAdmin();
-            method  = "admin_login";
-            BackgroundTask backgroundTask = new BackgroundTask(ChangePassword.this);
-            backgroundTask.delegate = this;
-            backgroundTask.execute(method, user , user_pass);
-        }else {
-            user = User.getRegdNo();
-            method = "login";
-            BackgroundTask backgroundTask = new BackgroundTask(ChangePassword.this);
-            backgroundTask.execute(method, user, user_pass);
-        }
-    }
-
-    protected static void setResult(boolean result) {
-        if(result) {
-            userAuthenticated = true;
-        }else {
-            userAuthenticated = false;
-        }
-    }
-
-    @Override
-    public void processFinished(String result) {
-        if(userAuthenticated) {
-                BackgroundTask backgroundTask = new BackgroundTask(ChangePassword.this);
-                backgroundTask.delegate = this;
-                backgroundTask.execute("change_password", user, setP, Boolean.valueOf(LoginActivity.isAdmin).toString());
-        }
-    }
 }

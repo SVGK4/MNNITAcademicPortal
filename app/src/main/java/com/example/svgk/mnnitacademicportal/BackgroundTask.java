@@ -62,7 +62,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         String feedback_url = "https://server-manasabhilash.c9users.io/feedback.php";
         String image_url = "https://server-manasabhilash.c9users.io/image_connection.php";
         String image_receive_utl = "https://server-manasabhilash.c9users.io/recieve_image.php";
-        String change_pass = "https://server-manasabhilash.c9users.io/changePassword.php";
+        String change_pass_url = "https://server-manasabhilash.c9users.io/changePassword.php";
 
 
         method = params[0];
@@ -360,11 +360,6 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 String response = getResponse(inputStream);
                 httpURLConnection.disconnect();
-                if(response.equals("true")) {
-                    ChangePassword.setResult(true);
-                }else {
-                    ChangePassword.setResult(false);
-                }
                 return response;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -375,9 +370,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         }else if(method.equals("change_password")) {
             String user_name = params[1];
             String user_pass = params[2];
-            String state = params[3];
             try {
-                URL url = new URL(admin_log_url);
+                URL url = new URL(change_pass_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
@@ -385,7 +379,7 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 OutputStream os = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
                 String data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8") + "&" +
-                        URLEncoder.encode("user_pass", "UTF-8") + "=" + URLEncoder.encode(user_pass, "UTF-8") + "&" +URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode(state, "UTF-8");
+                        URLEncoder.encode("user_pass", "UTF-8") + "=" + URLEncoder.encode(user_pass, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -393,11 +387,6 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 String response = getResponse(inputStream);
                 httpURLConnection.disconnect();
-                if(response.equals("true")) {
-                    ChangePassword.setResult(true);
-                }else {
-                    ChangePassword.setResult(false);
-                }
                 return response;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -449,6 +438,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             Toast.makeText(ctx, "done", Toast.LENGTH_SHORT).show();
         } else if(method.equals("admin_login")){
             delegate.processFinished(result);
+        } else if(method.equals("change_password")){
+            Toast.makeText(ctx, "Password Changed", Toast.LENGTH_SHORT).show();
         }
     }
 }
