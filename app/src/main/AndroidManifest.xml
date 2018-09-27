@@ -49,6 +49,7 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".ResetActivity" />
         <activity android:name=".ChangePassword" />
+        <activity android:name=".ChangePassword" />
 
         <service android:name=".FirebaseNotification.MyFirebaseInstanceIdService">
             <intent-filter>
@@ -64,6 +65,8 @@
         <activity android:name=".ResultActivity"></activity>
         <activity android:name=".DownloadActivity"
             android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".TranscriptActivity"></activity>
     </application>
 
 </manifest>
