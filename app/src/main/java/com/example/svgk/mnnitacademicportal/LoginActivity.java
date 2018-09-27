@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
     private ProgressDialog progressDialog;
     private Switch adminToggle;
     private TextInputLayout userHint;
+    protected static boolean isAdmin;
+    private static String admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             @Override
             public void onClick(View v) {
                 user_name = username.getText().toString();
+                setAdmin(user_name);
                 user_pass = userpass.getText().toString();
                 try {
                     MessageDigest md = null;
@@ -107,9 +110,11 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b) {
+                    isAdmin  = true;
                     username.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
                     userHint.setHint("Admin Username");
                 }else {
+                    isAdmin = false;
                     username.setInputType(InputType.TYPE_CLASS_NUMBER);
                     userHint.setHint("Registration Number");
                 }
@@ -120,7 +125,12 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
 
     protected void confirmLogin(){
         progressDialog = ProgressDialog.show(LoginActivity.this,"Checking credentials","Please wait...",false,false);
-        String method = "login";
+        String method ;
+        if(isAdmin) {
+            method  = "admin_login";
+        }else {
+            method = "login";
+        }
         BackgroundTask backgroundTask = new BackgroundTask(LoginActivity.this);
         backgroundTask.delegate = LoginActivity.this;
         backgroundTask.execute(method, user_name, user_pass);
@@ -128,45 +138,59 @@ public class LoginActivity extends AppCompatActivity implements BackgroundTask.B
 
     @Override
     public void processFinished(String userJSON) {
-        try {
-            JSONObject baseJsonResponse = new JSONObject(userJSON);
+        if (isAdmin && userJSON.equalsIgnoreCase("true ")) {
+            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            try {
+                JSONObject baseJsonResponse = new JSONObject(userJSON);
 
-            JSONArray userArray = baseJsonResponse.getJSONArray("server_response");
+                JSONArray userArray = baseJsonResponse.getJSONArray("server_response");
 
-            JSONObject currentUser = userArray.getJSONObject(0);
+                JSONObject currentUser = userArray.getJSONObject(0);
 
-            String reg_no = currentUser.getString("regd_no");
-            String name = currentUser.getString("name");
-            String branch = currentUser.getString("branch");
-            String mail_id = currentUser.getString("email");
-            String db = currentUser.getString("dob");
-            String contact = currentUser.getString("contact");
-            String gender = currentUser.getString("gender");
-            String address = currentUser.getString("address");
-            String user_pass = currentUser.getString("user_pass");
-            String semester = currentUser.getString("semester");
-            String status = currentUser.getString("status");
-            if (status.equals("Approved")) {
-                User user = new User(name, reg_no, user_pass, mail_id, contact, db, branch, semester, gender, address);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
-                finish();
-            }else{
-                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                String reg_no = currentUser.getString("regd_no");
+                String name = currentUser.getString("name");
+                String branch = currentUser.getString("branch");
+                String mail_id = currentUser.getString("email");
+                String db = currentUser.getString("dob");
+                String contact = currentUser.getString("contact");
+                String gender = currentUser.getString("gender");
+                String address = currentUser.getString("address");
+                String user_pass = currentUser.getString("user_pass");
+                String semester = currentUser.getString("semester");
+                String status = currentUser.getString("status");
+                if (status.equals("Approved")) {
+                    User user = new User(name, reg_no, user_pass, mail_id, contact, db, branch, semester, gender, address);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                }
+                Context context = getApplicationContext();
+                SharedPreferences preferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("user_name", user_name);
+                editor.putString("user_pass", user_pass);
+                editor.apply();
+                progressDialog.dismiss();
+
+            } catch (JSONException e) {
+                progressDialog.dismiss();
+                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
             }
-            Context context = getApplicationContext();
-            SharedPreferences preferences = context.getSharedPreferences("login",Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("user_name",user_name);
-            editor.putString("user_pass",user_pass);
-            editor.apply();
-            progressDialog.dismiss();
-
-        } catch (JSONException e) {
-            progressDialog.dismiss();
-            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    protected static String getAdmin() {
+        return admin;
+    }
+
+    private static void setAdmin(String user_name) {
+        admin = user_name;
     }
 
 }

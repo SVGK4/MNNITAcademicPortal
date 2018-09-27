@@ -51,16 +51,19 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
 
-        String reg_url = "http://10.0.2.2/mnnit_database/register.php";
-        String log_url = "http://10.0.2.2/mnnit_database/user.php";
-        String admin_url = "http://10.0.2.2/mnnit_database/admin_user.php";
-        String approve_url = "http://10.0.2.2/mnnit_database/set_approve.php";
-        String feedback_url = "http://10.0.2.2/mnnit_database/feedback.php";
-        String image_url = "http://10.0.2.2/mnnit_database/image_connection.php";
-        String image_receive_utl = "http://10.0.2.2/mnnit_database/recieve_image.php";
-        String deny_url = "http://10.0.2.2/mnnit_database/deny_approval.php";
-        String search_student_url = "http://10.0.2.2/mnnit_database/search_student.php";
-        String update_user_url = "http://10.0.2.2/mnnit_database/update_user.php";
+        String deny_url = "https://server-manasabhilash.c9users.io/deny_approval.php";
+        String search_student_url = "https://server-manasabhilash.c9users.io/search_student.php";
+        String update_user_url = "https://server-manasabhilash.c9users.io/update_user.php";
+        String reg_url = "https://server-manasabhilash.c9users.io/register.php";
+        String log_url = "https://server-manasabhilash.c9users.io/user.php";
+        String admin_log_url = "https://server-manasabhilash.c9users.io/adminLogin.php";
+        String admin_url = "https://server-manasabhilash.c9users.io/admin_user.php";
+        String approve_url = "https://server-manasabhilash.c9users.io/set_approve.php";
+        String feedback_url = "https://server-manasabhilash.c9users.io/feedback.php";
+        String image_url = "https://server-manasabhilash.c9users.io/image_connection.php";
+        String image_receive_utl = "https://server-manasabhilash.c9users.io/recieve_image.php";
+        String change_pass = "https://server-manasabhilash.c9users.io/changePassword.php";
+
 
         method = params[0];
 
@@ -337,6 +340,70 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if(method.equals("admin_login")) {
+            String user_name = params[1];
+            String user_pass = params[2];
+            try {
+                URL url = new URL(admin_log_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8") + "&" +
+                        URLEncoder.encode("user_pass", "UTF-8") + "=" + URLEncoder.encode(user_pass, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                String response = getResponse(inputStream);
+                httpURLConnection.disconnect();
+                if(response.equals("true")) {
+                    ChangePassword.setResult(true);
+                }else {
+                    ChangePassword.setResult(false);
+                }
+                return response;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else if(method.equals("change_password")) {
+            String user_name = params[1];
+            String user_pass = params[2];
+            String state = params[3];
+            try {
+                URL url = new URL(admin_log_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8") + "&" +
+                        URLEncoder.encode("user_pass", "UTF-8") + "=" + URLEncoder.encode(user_pass, "UTF-8") + "&" +URLEncoder.encode("state", "UTF-8") + "=" + URLEncoder.encode(state, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                String response = getResponse(inputStream);
+                httpURLConnection.disconnect();
+                if(response.equals("true")) {
+                    ChangePassword.setResult(true);
+                }else {
+                    ChangePassword.setResult(false);
+                }
+                return response;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
@@ -380,6 +447,8 @@ public class BackgroundTask extends AsyncTask<String, Void, String> {
         } else if (method.equals("search_student")) {
             delegate.processFinished(result);
             Toast.makeText(ctx, "done", Toast.LENGTH_SHORT).show();
+        } else if(method.equals("admin_login")){
+            delegate.processFinished(result);
         }
     }
 }

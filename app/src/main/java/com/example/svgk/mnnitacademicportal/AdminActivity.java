@@ -1,6 +1,7 @@
 package com.example.svgk.mnnitacademicportal;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +40,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
         BackgroundTask background = new BackgroundTask(this);
         background.delegate = AdminActivity.this;
         final String method = "admin_user";
-        progressDialog = ProgressDialog.show(AdminActivity.this,"Getting Details    ","Please wait...",false,false);
+        progressDialog = ProgressDialog.show(AdminActivity.this, "Getting Details    ", "Please wait...", false, false);
 
         background.execute(method);
 
@@ -99,7 +102,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
         recyclerView.setAdapter(adapter);
     }
 
-    private List<MultipleUsers> extractFeatureFromJson(String userJSON){
+    private List<MultipleUsers> extractFeatureFromJson(String userJSON) {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(userJSON)) {
             return null;
@@ -129,7 +132,7 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
                 String mail_id = currentUser.getString("email");
                 // Create a new {@link MultipleUsers} object with the magnitude, location, time,
                 // and url from the JSON response.
-                MultipleUsers user = new MultipleUsers(reg_no,name,branch,mail_id);
+                MultipleUsers user = new MultipleUsers(reg_no, name, branch, mail_id);
 
                 // Add the new {@link MultipleUsers} to the list of users.
                 users.add(user);
@@ -145,4 +148,26 @@ public class AdminActivity extends AppCompatActivity implements BackgroundTask.B
         // Return the list of users
         return users;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.notification:
+                Intent intent = new Intent(AdminActivity.this, NotificationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.newPass:
+                Intent intent1 = new Intent(AdminActivity.this, ChangePassword.class);
+                startActivity(intent1);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_admin, menu);
+        return true;
+    }
+
 }

@@ -80,5 +80,6 @@
     <string name="send_mail">send</string>
     <string name="select_image">select image</string>
     <string name="upload">upload</string>
+    <string name="enter_cuurent_password">Enter Cuurent Password</string>
 
 </resources>

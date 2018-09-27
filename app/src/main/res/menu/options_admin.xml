@@ -2,10 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <item android:id="@+id/email"
-        android:title="@string/email"
+    <item android:id="@+id/notification"
+        android:title="Upload Notice"
         android:icon="@mipmap/search"
         app:showAsAction="never" />
+
+
+    <item android:id="@+id/newPass"
+        android:title="Change Password"
+        android:icon="@mipmap/search"
+        app:showAsAction="never" />
+
 
 </menu>

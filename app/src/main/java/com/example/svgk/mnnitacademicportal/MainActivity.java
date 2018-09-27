@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_container, new HomeFragment()).commit();
                         break;
-                    case R.id.go:
-                        break;
                     case R.id.fd:
                         Intent forgotIntent = new Intent(MainActivity.this, FeedbackActivity.class);
                         startActivity(forgotIntent);
@@ -82,14 +80,6 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                         editor.putString("user_pass", null);
                         editor.apply();
                         finish();
-                        break;
-                    case R.id.admin:
-                        Intent adminIntent = new Intent(MainActivity.this, AdminActivity.class);
-                        startActivity(adminIntent);
-                        break;
-                    case R.id.notification:
-                        Intent notificationIntent = new Intent(MainActivity.this,NotificationActivity.class);
-                        startActivity(notificationIntent);
                         break;
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -113,13 +103,18 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
             case R.id.email:
                 Intent intent = new Intent(MainActivity.this, EmailActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.newPass:
+                Intent intent1 = new Intent(MainActivity.this, ChangePassword.class);
+                startActivity(intent1);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.options_main_activity, menu);
+        getMenuInflater().inflate(R.menu.options_main, menu);
         return true;
     }
 
