@@ -17,6 +17,10 @@
             android:title="Transcript"
             android:icon="@mipmap/trans"/>
 
+        <item android:id="@+id/semRegisterS"
+            android:title="Semester Registration"
+            android:icon="@mipmap/sem_reg"/>
+
         <item android:id="@+id/fd"
             android:title="Feedback"
             android:icon="@mipmap/feedbck"/>

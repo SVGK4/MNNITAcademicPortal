@@ -63,7 +63,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/home/manasabhilash/Tools/android-studio-ide-173.4907809-linux/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_assessment_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/home/manasabhilash/Tools/android-studio-ide-173.4907809-linux/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_class_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -75,7 +75,7 @@
                                     <map>
                                       <entry key="backgroundColor" value="e4c8bd" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="outputName" value="result" />
+                                      <entry key="outputName" value="sem_reg" />
                                     </map>
                                   </option>
                                 </PersistentState>
