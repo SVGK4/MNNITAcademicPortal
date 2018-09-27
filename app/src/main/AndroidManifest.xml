@@ -65,7 +65,7 @@
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".ResultActivity" />
         <activity android:name=".TranscriptActivity" />
-        <activity android:name=".SemesterRegistration"></activity>
+        <activity android:name=".SemesterRegistration"/>
     </application>
 
 </manifest>
