@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
     private ImageView photo;
     private String acad_cal_url = "https://server-manasabhilash.c9users.io/misc/academic_calendar.pdf";
     private String fee_structure_url = "https://server-manasabhilash.c9users.io/misc/fee_structure.pdf";
+    private String transcript_url = "https://server-manasabhilash.c9users.io/transcript/20174063.pdf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                                 .replace(R.id.fragment_container, new HomeFragment()).commit();
                         break;
                     case R.id.fd:
-                        Intent forgotIntent = new Intent(MainActivity.this, FeedbackActivity.class);
-                        startActivity(forgotIntent);
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, new FeedbackFragment()).commit();
                         break;
                     case R.id.logOut:
                         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
@@ -99,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements BackgroundTask.Ba
                     case R.id.dwnlds:
                         Intent intent = new Intent(MainActivity.this,DownloadActivity.class);
                         startActivity(intent);
+                        break;
+                    case R.id.transcript:
+                        getPdf(transcript_url);
                         break;
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);

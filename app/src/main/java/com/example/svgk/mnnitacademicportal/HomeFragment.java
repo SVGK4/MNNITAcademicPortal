@@ -43,13 +43,13 @@ public class HomeFragment extends Fragment {
     PdfAdapter pdfAdapter;
     ListView listView;
     ArrayList<Pdf> pdfList = new ArrayList<Pdf>();
+    private static int checkLoaded = 0;
 
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
-
 
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
         email = rootView.findViewById(R.id.student_email);
         contact = rootView.findViewById(R.id.student_phone_number);
         photo = rootView.findViewById(R.id.student_photo);
-        listView =  rootView.findViewById(R.id.listView);
+        listView = rootView.findViewById(R.id.listView);
 
         photo.setImageBitmap(imageBitmap);
 
@@ -69,12 +69,13 @@ public class HomeFragment extends Fragment {
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),UserProfile.class);
+                Intent intent = new Intent(getContext(), UserProfile.class);
                 startActivity(intent);
             }
         });
 
         getPdfs();
+
         name.setText("Name : " + User.getNAME());
         regd_no.setText("Regd. No : " + User.getRegdNo());
         email.setText("Email : " + User.getEMAIL());
@@ -125,6 +126,7 @@ public class HomeFragment extends Fragment {
 
     private void getPdfs() {
 
+        checkLoaded = 1;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PDF_FETCH_URL,
 
                 new Response.Listener<String>() {
@@ -152,11 +154,7 @@ public class HomeFragment extends Fragment {
 
                             }
 
-                            pdfAdapter = new PdfAdapter(getActivity(), R.layout.list_layout, pdfList);
-
-                            listView.setAdapter(pdfAdapter);
-
-                            pdfAdapter.notifyDataSetChanged();
+                            setPdf();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -179,6 +177,14 @@ public class HomeFragment extends Fragment {
         RequestQueue request = Volley.newRequestQueue(getContext());
         request.add(stringRequest);
 
+    }
+
+    private void setPdf() {
+        pdfAdapter = new PdfAdapter(getActivity(), R.layout.list_layout, pdfList);
+
+        listView.setAdapter(pdfAdapter);
+
+        pdfAdapter.notifyDataSetChanged();
     }
 
 
